@@ -100,10 +100,10 @@ export default function StrategyBuilderPage() {
             <button className="glass-card p-2 rounded-lg text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
               <span className="material-symbols-outlined">filter_list</span>
             </button>
-            <button className="btn-primary p-2 rounded-lg text-on-primary transition-colors flex items-center gap-2 px-4 shadow-[0_0_15px_rgba(255,180,163,0.3)]">
+            <a href="/ai-assistant" className="btn-primary p-2 rounded-lg text-on-primary transition-colors flex items-center gap-2 px-4 shadow-[0_0_15px_rgba(255,180,163,0.3)]">
               <span className="material-symbols-outlined text-[20px]">add</span>
               <span className="font-label-caps uppercase tracking-wider hidden md:block">New AI Strategy</span>
-            </button>
+            </a>
           </div>
         </header>
 

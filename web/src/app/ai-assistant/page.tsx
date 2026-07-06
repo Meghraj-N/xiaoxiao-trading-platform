@@ -14,6 +14,9 @@ export default function AIAssistantPage() {
   const [showCommands, setShowCommands] = useState(false);
   const [editingSessionId, setEditingSessionId] = useState<string | null>(null);
   const [editTitleValue, setEditTitleValue] = useState("");
+  const [showImportModal, setShowImportModal] = useState(false);
+  const [importName, setImportName] = useState("");
+  const [importCode, setImportCode] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   // Is component mounted (for hydration)
@@ -255,6 +258,25 @@ export default function AIAssistantPage() {
                     <p className="font-body-md text-body-md text-on-surface relative z-10 leading-relaxed whitespace-pre-wrap">
                       {msg.text}
                     </p>
+                    
+                    {msg.role === 'assistant' && msg.text.includes('```python') && (
+                      <div className="mt-4 relative z-10 border-t border-white/5 pt-4">
+                        <button 
+                          onClick={() => {
+                             const codeMatch = msg.text.match(/```python\n([\s\S]*?)```/);
+                             if (codeMatch) {
+                               setImportCode(codeMatch[1]);
+                               setImportName("");
+                               setShowImportModal(true);
+                             }
+                          }}
+                          className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-lg text-[13px] font-title-md transition-colors shadow-[0_0_10px_rgba(255,180,163,0.1)]"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">file_download</span>
+                          Import to Strategy Builder
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -340,6 +362,70 @@ export default function AIAssistantPage() {
 
         </div>
       </main>
+
+      {/* Import Modal */}
+      {showImportModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-surface-container p-6 rounded-2xl border border-white/10 w-full max-w-md shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center gap-3 text-primary mb-2">
+              <span className="material-symbols-outlined text-[24px]">architecture</span>
+              <h3 className="font-headline-sm text-headline-sm">Save Strategy</h3>
+            </div>
+            
+            <p className="text-on-surface-variant font-body-md text-sm">
+              Give your new AI-generated strategy a name before deploying it to the Strategy Hub.
+            </p>
+
+            <input 
+              value={importName}
+              onChange={e => setImportName(e.target.value)}
+              placeholder="e.g. Trend Follower Alpha"
+              autoFocus
+              onKeyDown={e => {
+                if (e.key === 'Enter' && importName.trim()) {
+                  document.getElementById('save-strategy-btn')?.click();
+                }
+              }}
+              className="w-full bg-surface-container-lowest border border-white/10 p-3 rounded-lg text-on-surface font-title-md focus:border-primary focus:ring-0 outline-none transition-colors"
+            />
+            
+            <div className="flex justify-end gap-3 mt-2">
+              <button 
+                onClick={() => setShowImportModal(false)} 
+                className="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors font-label-caps tracking-wide"
+              >
+                Cancel
+              </button>
+              <button 
+                id="save-strategy-btn"
+                disabled={!importName.trim()}
+                onClick={async () => {
+                   try {
+                      const res = await fetch('http://localhost:8000/api/custom-strategies', {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json'},
+                         body: JSON.stringify({ name: importName.trim(), code: importCode })
+                      });
+                      if (res.ok) {
+                        setShowImportModal(false);
+                        window.location.href = '/strategy-builder';
+                      } else {
+                        const err = await res.json();
+                        alert(`Failed to save strategy: ${err.detail || 'Unknown error'}`);
+                      }
+                   } catch (e) {
+                      alert('Failed to connect to backend server');
+                   }
+                }}
+                className="px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity font-label-caps tracking-wide disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">save</span>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
