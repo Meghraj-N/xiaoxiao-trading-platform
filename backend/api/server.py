@@ -188,6 +188,9 @@ async def get_risk():
 @app.get("/api/settings")
 async def get_settings_endpoint():
     import config
+    def redact(val):
+        return "********" if val else ""
+
     return {
         "STARTING_CAPITAL": config.STARTING_CAPITAL,
         "DEFAULT_LEVERAGE": config.DEFAULT_LEVERAGE,
@@ -196,6 +199,12 @@ async def get_settings_endpoint():
         "MAX_OPEN_POSITIONS": config.MAX_OPEN_POSITIONS,
         "MIN_RISK_PCT": config.MIN_RISK_PCT,
         "MAX_RISK_PCT": config.MAX_RISK_PCT,
+        "DELTA_API_KEY": redact(config.DELTA_API_KEY),
+        "DELTA_API_SECRET": redact(config.DELTA_API_SECRET),
+        "NVIDIA_API_KEY": redact(config.NVIDIA_API_KEY),
+        "OPENROUTER_API_KEY": redact(config.OPENROUTER_API_KEY),
+        "AI_PROVIDER": config.AI_PROVIDER,
+        "DEFAULT_AI_MODEL": config.DEFAULT_AI_MODEL
     }
 
 class AIChatRequest(BaseModel):
@@ -421,20 +430,37 @@ async def update_settings_endpoint(request: Request):
     try:
         data = await request.json()
         import config
-        config.update_settings(data)
         
-        # We should also update instances that depend on these configs if needed
-        paper_trader = _engine_state.get("paper_trader")
-        if paper_trader and "STARTING_CAPITAL" in data:
-            paper_trader.update_starting_capital(data["STARTING_CAPITAL"])
+        updates = {}
+        for key, value in data.items():
+            if key in ["DELTA_API_KEY", "DELTA_API_SECRET", "NVIDIA_API_KEY", "OPENROUTER_API_KEY"]:
+                if value and value != "********":
+                    updates[key] = value
+            else:
+                updates[key] = value
+                
+        if updates:
+            config.update_settings(updates)
+            
+            # Update instances that depend on these configs if needed
+            paper_trader = _engine_state.get("paper_trader")
+            if paper_trader and "STARTING_CAPITAL" in updates:
+                paper_trader.update_starting_capital(updates["STARTING_CAPITAL"])
 
-        # Let's broadcast the new settings so UI can refresh
-        await broadcast({
-            "type": "settings_updated",
-            "settings": data
-        })
-        
-        return {"status": "success", "settings": data}
+            # If AI settings changed, actively reload the AI Engine in memory
+            if any(k in updates for k in ["NVIDIA_API_KEY", "OPENROUTER_API_KEY", "AI_PROVIDER"]):
+                if "ai_engine" in _engine_state:
+                    logger.info("AI Provider/Keys changed. Reloading AIEngine...")
+                    from engine.ai_engine import AIEngine
+                    _engine_state["ai_engine"] = AIEngine()
+
+            # Let's broadcast the new settings so UI can refresh
+            await broadcast({
+                "type": "settings_updated",
+                "settings": updates
+            })
+            
+        return {"status": "success", "settings": updates}
     except Exception as e:
         logger.error(f"Error updating settings: {e}")
         return {"status": "error", "message": str(e)}
@@ -771,77 +797,6 @@ async def list_backtest_results(strategy: str = Query(None), limit: int = Query(
 
 
 # ── Settings ──
-
-@app.get("/api/settings")
-async def get_settings():
-    return {
-        "STARTING_CAPITAL": config.STARTING_CAPITAL,
-        "DEFAULT_LEVERAGE": config.DEFAULT_LEVERAGE,
-        "MAX_DRAWDOWN_PCT": config.MAX_DRAWDOWN_PCT,
-        "DAILY_LOSS_LIMIT_PCT": config.DAILY_LOSS_LIMIT_PCT,
-        "MAX_OPEN_POSITIONS": config.MAX_OPEN_POSITIONS,
-        "MIN_RISK_PCT": config.MIN_RISK_PCT,
-        "MAX_RISK_PCT": config.MAX_RISK_PCT,
-    }
-
-@app.post("/api/settings")
-async def update_settings(body: dict):
-    # Only update known keys
-    allowed_keys = [
-        "STARTING_CAPITAL", "DEFAULT_LEVERAGE", "MAX_DRAWDOWN_PCT",
-        "DAILY_LOSS_LIMIT_PCT", "MAX_OPEN_POSITIONS", "MIN_RISK_PCT", "MAX_RISK_PCT"
-    ]
-    updates = {}
-    for k, v in body.items():
-        if k in allowed_keys:
-            updates[k] = v
-            
-    if updates:
-        config.update_settings(updates)
-        # Notify clients
-        await broadcast({"type": "settings_update", "settings": updates})
-        
-    return {"status": "success", "updated": updates}
-
-@app.get("/api/settings")
-async def get_all_settings():
-    def redact(val):
-        return "********" if val else ""
-
-    return {
-        "DELTA_API_KEY": redact(config.DELTA_API_KEY),
-        "DELTA_API_SECRET": redact(config.DELTA_API_SECRET),
-        "NVIDIA_API_KEY": redact(config.NVIDIA_API_KEY),
-        "OPENROUTER_API_KEY": redact(config.OPENROUTER_API_KEY),
-        "AI_PROVIDER": config.AI_PROVIDER,
-        "DEFAULT_AI_MODEL": config.DEFAULT_AI_MODEL
-    }
-
-@app.post("/api/settings")
-async def update_all_settings(req: Request):
-    data = await req.json()
-    updates = {}
-    
-    # Only update if value is provided and not just "********"
-    for key in ["DELTA_API_KEY", "DELTA_API_SECRET", "NVIDIA_API_KEY", "OPENROUTER_API_KEY"]:
-        if key in data and data[key] and data[key] != "********":
-            updates[key] = data[key]
-            
-    for key in ["AI_PROVIDER", "DEFAULT_AI_MODEL"]:
-        if key in data and data[key]:
-            updates[key] = data[key]
-            
-    if updates:
-        config.update_settings(updates)
-        
-        # If AI settings changed, actively reload the AI Engine in memory
-        if any(k in updates for k in ["NVIDIA_API_KEY", "OPENROUTER_API_KEY", "AI_PROVIDER"]):
-            if "ai_engine" in _engine_state:
-                logger.info("AI Provider/Keys changed. Reloading AIEngine...")
-                from engine.ai_engine import AIEngine
-                _engine_state["ai_engine"] = AIEngine()
-                
-    return {"status": "success", "message": "Settings saved."}
 
 
 # ── WebSocket ──

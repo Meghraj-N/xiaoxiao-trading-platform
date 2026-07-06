@@ -7,5 +7,5 @@
     "MIN_RISK_PCT": 0.01,
     "MAX_RISK_PCT": 0.02,
     "NVIDIA_API_KEY": "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",
-    "DEFAULT_AI_MODEL": ""
+    "DEFAULT_AI_MODEL": "z-ai/glm-5.2"
 }
