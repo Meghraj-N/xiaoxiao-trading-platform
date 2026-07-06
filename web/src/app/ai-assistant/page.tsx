@@ -61,7 +61,10 @@ export default function AIAssistantPage() {
       {/* Sidebar: Past Sessions */}
       <aside className="w-64 border-r border-white/5 bg-surface/30 backdrop-blur-md hidden md:flex flex-col h-full shrink-0">
         <div className="p-4 border-b border-white/5">
-          <button className="w-full flex items-center justify-center gap-2 border border-outline-variant hover:border-primary text-on-surface hover:text-primary rounded-lg py-2 transition-colors">
+          <button 
+            onClick={() => setMessages([])}
+            className="w-full flex items-center justify-center gap-2 border border-outline-variant hover:border-primary text-on-surface hover:text-primary rounded-lg py-2 transition-colors"
+          >
             <span className="material-symbols-outlined text-[20px]">add</span>
             <span className="font-title-md text-[14px]">New Chat</span>
           </button>
