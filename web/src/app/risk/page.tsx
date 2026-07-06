@@ -1,8 +1,65 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function RiskPage() {
+  const [settings, setSettings] = useState({
+    MAX_DRAWDOWN_PCT: 15,
+    DAILY_LOSS_LIMIT_PCT: 3,
+    MAX_OPEN_POSITIONS: 2,
+    DEFAULT_LEVERAGE: 5
+  });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        setSettings({
+          MAX_DRAWDOWN_PCT: (data.MAX_DRAWDOWN_PCT || 0.15) * 100,
+          DAILY_LOSS_LIMIT_PCT: (data.DAILY_LOSS_LIMIT_PCT || 0.03) * 100,
+          MAX_OPEN_POSITIONS: data.MAX_OPEN_POSITIONS || 2,
+          DEFAULT_LEVERAGE: data.DEFAULT_LEVERAGE || 5
+        });
+        setLoading(false);
+      })
+      .catch(console.error);
+  }, []);
+
+  const updateSetting = async (key: string, value: number) => {
+    const newSettings = { ...settings, [key]: value };
+    setSettings(newSettings);
+
+    const apiPayload = {
+      MAX_DRAWDOWN_PCT: newSettings.MAX_DRAWDOWN_PCT / 100,
+      DAILY_LOSS_LIMIT_PCT: newSettings.DAILY_LOSS_LIMIT_PCT / 100,
+      MAX_OPEN_POSITIONS: newSettings.MAX_OPEN_POSITIONS,
+      DEFAULT_LEVERAGE: newSettings.DEFAULT_LEVERAGE
+    };
+
+    try {
+      await fetch('http://localhost:8000/api/risk/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apiPayload)
+      });
+    } catch (err) {
+      console.error('Failed to update setting', err);
+    }
+  };
+
+  const handleLiquidate = async () => {
+    if (!confirm('Are you sure you want to LIQUIDATE ALL positions? This will halt trading immediately.')) return;
+    try {
+      const res = await fetch('http://localhost:8000/api/risk/liquidate', { method: 'POST' });
+      const data = await res.json();
+      alert(data.message || 'Liquidated successfully');
+    } catch (err) {
+      alert('Failed to liquidate positions');
+    }
+  };
+
   return (
     <div className="p-gutter min-h-full">
       <div className="max-w-[1440px] mx-auto space-y-6 pb-20">
@@ -41,28 +98,35 @@ export default function RiskPage() {
                 <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors">
                   <div className="flex items-center justify-between">
                     <h3 className="font-title-md text-sm text-on-surface">Max Daily Drawdown</h3>
-                    <span className="font-data-sm text-error font-bold">-5.0%</span>
+                    <span className="font-data-sm text-error font-bold">-{settings.MAX_DRAWDOWN_PCT.toFixed(1)}%</span>
                   </div>
-                  <input type="range" className="w-full accent-primary" min="1" max="20" defaultValue="5" />
+                  <input type="range" className="w-full accent-primary" min="1" max="50" value={settings.MAX_DRAWDOWN_PCT} onChange={(e) => updateSetting('MAX_DRAWDOWN_PCT', parseFloat(e.target.value))} />
                 </div>
                 <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-title-md text-sm text-on-surface">Max Position Size</h3>
-                    <span className="font-data-sm text-secondary font-bold">15%</span>
+                    <h3 className="font-title-md text-sm text-on-surface">Daily Loss Limit</h3>
+                    <span className="font-data-sm text-secondary font-bold">-{settings.DAILY_LOSS_LIMIT_PCT.toFixed(1)}%</span>
                   </div>
-                  <input type="range" className="w-full accent-secondary" min="1" max="50" defaultValue="15" />
+                  <input type="range" className="w-full accent-secondary" min="1" max="20" value={settings.DAILY_LOSS_LIMIT_PCT} onChange={(e) => updateSetting('DAILY_LOSS_LIMIT_PCT', parseFloat(e.target.value))} />
+                </div>
+                <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-title-md text-sm text-on-surface">Max Open Positions</h3>
+                    <span className="font-data-sm text-on-surface font-bold">{settings.MAX_OPEN_POSITIONS}</span>
+                  </div>
+                  <input type="range" className="w-full accent-primary" min="1" max="20" value={settings.MAX_OPEN_POSITIONS} onChange={(e) => updateSetting('MAX_OPEN_POSITIONS', parseInt(e.target.value))} />
                 </div>
                 <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors">
                   <div className="flex items-center justify-between">
                     <h3 className="font-title-md text-sm text-on-surface">Max Leverage</h3>
-                    <span className="font-data-sm text-outline font-bold">2.0x</span>
+                    <span className="font-data-sm text-outline font-bold">{settings.DEFAULT_LEVERAGE}.0x</span>
                   </div>
-                  <input type="range" className="w-full accent-outline" min="1" max="10" defaultValue="2" />
+                  <input type="range" className="w-full accent-outline" min="1" max="100" value={settings.DEFAULT_LEVERAGE} onChange={(e) => updateSetting('DEFAULT_LEVERAGE', parseInt(e.target.value))} />
                 </div>
-                <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors">
+                <div className="bg-surface-container-low p-4 rounded-lg border border-white/5 flex flex-col gap-2 group hover:border-primary/30 transition-colors col-span-1 sm:col-span-2">
                   <div className="flex items-center justify-between">
                     <h3 className="font-title-md text-sm text-on-surface">Kill Switch</h3>
-                    <button className="bg-red-500/20 text-red-500 border border-red-500/30 px-3 py-1 rounded text-xs font-bold hover:bg-red-500 hover:text-white transition-colors">LIQUIDATE ALL</button>
+                    <button onClick={handleLiquidate} className="bg-red-500/20 text-red-500 border border-red-500/30 px-3 py-1 rounded text-xs font-bold hover:bg-red-500 hover:text-white transition-colors">LIQUIDATE ALL</button>
                   </div>
                   <p className="text-[10px] text-on-surface-variant mt-1">Closes all positions and halts trading immediately.</p>
                 </div>
