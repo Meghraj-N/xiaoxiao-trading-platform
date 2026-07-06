@@ -204,18 +204,23 @@ export default function SettingsPage() {
 
                   <div className="flex flex-col gap-2">
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Default Model</label>
-                    <select 
+                    <input 
+                      list="ai_models"
                       name="DEFAULT_AI_MODEL"
                       value={settings.DEFAULT_AI_MODEL || 'meta/llama-3.1-405b-instruct'}
                       onChange={handleChange}
+                      placeholder="e.g. openai/gpt-4o"
                       className="input-field w-full py-2 font-title-md text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs"
-                    >
+                    />
+                    <datalist id="ai_models">
                       <option value="meta/llama-3.1-405b-instruct">Llama 3.1 405B (NVIDIA)</option>
                       <option value="nvidia/nemotron-4-340b-instruct">Nemotron 340B (NVIDIA)</option>
                       <option value="mistralai/mixtral-8x22b-instruct-v0.1">Mixtral 8x22B (NVIDIA)</option>
                       <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (OpenRouter)</option>
                       <option value="openai/gpt-4o">GPT-4o (OpenRouter)</option>
-                    </select>
+                      <option value="deepseek/deepseek-chat">DeepSeek Chat (OpenRouter)</option>
+                      <option value="google/gemini-pro-1.5">Gemini Pro 1.5 (OpenRouter)</option>
+                    </datalist>
                   </div>
 
                 </div>
