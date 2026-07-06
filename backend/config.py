@@ -67,8 +67,8 @@ SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 USE_TESTNET: bool = False
 
 # API credentials — NEVER commit real keys
-DELTA_API_KEY: str = os.getenv("DELTA_API_KEY", "")
-DELTA_API_SECRET: str = os.getenv("DELTA_API_SECRET", "")
+DELTA_API_KEY: str = get_setting("DELTA_API_KEY", os.getenv("DELTA_API_KEY", ""))
+DELTA_API_SECRET: str = get_setting("DELTA_API_SECRET", os.getenv("DELTA_API_SECRET", ""))
 
 # ---------------------------------------------------------------------------
 # Trading Parameters
@@ -132,10 +132,10 @@ CORS_ORIGINS: list[str] = [
 # ---------------------------------------------------------------------------
 # AI Integration (NVIDIA NIM & OpenRouter)
 # ---------------------------------------------------------------------------
-NVIDIA_API_KEY: str = os.getenv("NVIDIA_API_KEY", "")
+NVIDIA_API_KEY: str = get_setting("NVIDIA_API_KEY", os.getenv("NVIDIA_API_KEY", ""))
 NVIDIA_BASE_URL: str = "https://integrate.api.nvidia.com/v1"
 
-OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_API_KEY: str = get_setting("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
 OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
 
 # Default provider choice
@@ -151,7 +151,7 @@ AI_MODELS: dict[str, str] = {
     "claude-3.5-sonnet": "anthropic/claude-3.5-sonnet",
     "gpt-4o": "openai/gpt-4o",
 }
-DEFAULT_AI_MODEL: str = "meta/llama-3.1-405b-instruct"
+DEFAULT_AI_MODEL: str = get_setting("DEFAULT_AI_MODEL", "meta/llama-3.1-405b-instruct")
 
 # ---------------------------------------------------------------------------
 # Custom Strategies

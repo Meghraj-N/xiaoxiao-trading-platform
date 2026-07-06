@@ -803,6 +803,47 @@ async def update_settings(body: dict):
         
     return {"status": "success", "updated": updates}
 
+@app.get("/api/settings")
+async def get_all_settings():
+    def redact(val):
+        return "********" if val else ""
+
+    return {
+        "DELTA_API_KEY": redact(config.DELTA_API_KEY),
+        "DELTA_API_SECRET": redact(config.DELTA_API_SECRET),
+        "NVIDIA_API_KEY": redact(config.NVIDIA_API_KEY),
+        "OPENROUTER_API_KEY": redact(config.OPENROUTER_API_KEY),
+        "AI_PROVIDER": config.AI_PROVIDER,
+        "DEFAULT_AI_MODEL": config.DEFAULT_AI_MODEL
+    }
+
+@app.post("/api/settings")
+async def update_all_settings(req: Request):
+    data = await req.json()
+    updates = {}
+    
+    # Only update if value is provided and not just "********"
+    for key in ["DELTA_API_KEY", "DELTA_API_SECRET", "NVIDIA_API_KEY", "OPENROUTER_API_KEY"]:
+        if key in data and data[key] and data[key] != "********":
+            updates[key] = data[key]
+            
+    for key in ["AI_PROVIDER", "DEFAULT_AI_MODEL"]:
+        if key in data and data[key]:
+            updates[key] = data[key]
+            
+    if updates:
+        config.update_settings(updates)
+        
+        # If AI settings changed, actively reload the AI Engine in memory
+        if any(k in updates for k in ["NVIDIA_API_KEY", "OPENROUTER_API_KEY", "AI_PROVIDER"]):
+            if "ai_engine" in _engine_state:
+                logger.info("AI Provider/Keys changed. Reloading AIEngine...")
+                from engine.ai_engine import AIEngine
+                _engine_state["ai_engine"] = AIEngine()
+                
+    return {"status": "success", "message": "Settings saved."}
+
+
 # ── WebSocket ──
 
 @app.websocket("/ws")

@@ -40,6 +40,9 @@ export default function RootLayout({
       <body
         className={`${sans.variable} ${serif.variable} ${mono.variable} font-sans antialiased bg-background text-foreground`}
         suppressHydrationWarning
+        data-gramm="false"
+        data-gramm_editor="false"
+        data-enable-grammarly="false"
       >
         <TopNavBar />
         <div className="flex min-h-screen pt-16">
