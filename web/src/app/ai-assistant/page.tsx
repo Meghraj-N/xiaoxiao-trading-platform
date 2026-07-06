@@ -12,6 +12,8 @@ export default function AIAssistantPage() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showCommands, setShowCommands] = useState(false);
+  const [editingSessionId, setEditingSessionId] = useState<string | null>(null);
+  const [editTitleValue, setEditTitleValue] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   // Is component mounted (for hydration)
@@ -81,6 +83,17 @@ export default function AIAssistantPage() {
     }
   };
 
+  const handleSaveRename = (id: string) => {
+    if (editTitleValue.trim()) {
+      setSessions(prev => {
+        const updated = prev.map(s => s.id === id ? { ...s, title: editTitleValue.trim() } : s);
+        localStorage.setItem('ai_chat_sessions', JSON.stringify(updated));
+        return updated;
+      });
+    }
+    setEditingSessionId(null);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
     e.target.style.height = 'auto';
@@ -145,18 +158,65 @@ export default function AIAssistantPage() {
         <div className="flex-1 overflow-y-auto chat-scroll p-3 flex flex-col gap-1">
           <h3 className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase px-2 pt-2 pb-1">Recent Chats</h3>
           {sessions.map(s => (
-            <button 
+            <div 
               key={s.id}
               onClick={() => handleSwitchChat(s.id)}
-              className={`w-full text-left px-3 py-2 rounded-lg transition-colors font-body-md text-[14px] truncate flex items-center gap-2 ${
+              className={`w-full group text-left px-3 py-2 rounded-lg transition-colors font-body-md text-[14px] flex items-center gap-2 cursor-pointer ${
                 activeSessionId === s.id 
                   ? 'bg-surface-container border-l-2 border-primary text-on-surface' 
                   : 'hover:bg-surface-container-high text-on-surface-variant'
               }`}
             >
-              <span className={`material-symbols-outlined text-[16px] ${activeSessionId === s.id ? 'text-primary' : ''}`}>chat_bubble</span>
-              {s.title}
-            </button>
+              <span className={`material-symbols-outlined text-[16px] shrink-0 ${activeSessionId === s.id ? 'text-primary' : ''}`}>chat_bubble</span>
+              
+              {editingSessionId === s.id ? (
+                <input 
+                  value={editTitleValue} 
+                  onChange={e => setEditTitleValue(e.target.value)}
+                  onClick={e => e.stopPropagation()}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') handleSaveRename(s.id);
+                    if (e.key === 'Escape') setEditingSessionId(null);
+                  }}
+                  onBlur={() => handleSaveRename(s.id)}
+                  autoFocus
+                  className="w-full bg-transparent border-b border-primary text-on-surface outline-none font-body-md text-[14px]"
+                />
+              ) : (
+                <>
+                  <span className="truncate flex-1">{s.title}</span>
+                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingSessionId(s.id);
+                        setEditTitleValue(s.title);
+                      }}
+                      className="p-1 hover:text-primary rounded shrink-0 flex items-center"
+                      title="Rename Chat"
+                    >
+                      <span className="material-symbols-outlined text-[14px]">edit</span>
+                    </button>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const newSessions = sessions.filter(session => session.id !== s.id);
+                        setSessions(newSessions);
+                        localStorage.setItem('ai_chat_sessions', JSON.stringify(newSessions));
+                        if (activeSessionId === s.id) {
+                            setMessages([]);
+                            setActiveSessionId(null);
+                        }
+                      }}
+                      className="p-1 hover:text-error rounded shrink-0 flex items-center"
+                      title="Delete Chat"
+                    >
+                      <span className="material-symbols-outlined text-[14px]">delete</span>
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           ))}
         </div>
       </aside>
