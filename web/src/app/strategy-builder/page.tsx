@@ -5,6 +5,10 @@ import React, { useState, useEffect } from 'react';
 export default function StrategyBuilderPage() {
   const [strategies, setStrategies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [createName, setCreateName] = useState("");
+  const [createCode, setCreateCode] = useState("");
 
   const fetchStrategies = async () => {
     try {
@@ -100,10 +104,17 @@ export default function StrategyBuilderPage() {
             <button className="glass-card p-2 rounded-lg text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
               <span className="material-symbols-outlined">filter_list</span>
             </button>
-            <a href="/ai-assistant" className="btn-primary p-2 rounded-lg text-on-primary transition-colors flex items-center gap-2 px-4 shadow-[0_0_15px_rgba(255,180,163,0.3)]">
+            <button 
+              onClick={() => {
+                 setCreateName("");
+                 setCreateCode("");
+                 setShowCreateModal(true);
+              }}
+              className="btn-primary p-2 rounded-lg text-on-primary transition-colors flex items-center gap-2 px-4 shadow-[0_0_15px_rgba(255,180,163,0.3)]"
+            >
               <span className="material-symbols-outlined text-[20px]">add</span>
-              <span className="font-label-caps uppercase tracking-wider hidden md:block">New AI Strategy</span>
-            </a>
+              <span className="font-label-caps uppercase tracking-wider hidden md:block">New Custom Strategy</span>
+            </button>
           </div>
         </header>
 
@@ -213,6 +224,77 @@ export default function StrategyBuilderPage() {
         </div>
 
       </div>
+
+      {/* Manual Create Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-surface-container p-6 rounded-2xl border border-white/10 w-full max-w-2xl shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center gap-3 text-primary mb-2">
+              <span className="material-symbols-outlined text-[24px]">architecture</span>
+              <h3 className="font-headline-sm text-headline-sm">Create Custom Strategy</h3>
+            </div>
+            
+            <p className="text-on-surface-variant font-body-md text-sm">
+              Manually write or paste your Python trading strategy code here.
+            </p>
+
+            <input 
+              value={createName}
+              onChange={e => setCreateName(e.target.value)}
+              placeholder="Strategy Name (e.g. My Custom Algo)"
+              autoFocus
+              className="w-full bg-surface-container-lowest border border-white/10 p-3 rounded-lg text-on-surface font-title-md focus:border-primary focus:ring-0 outline-none transition-colors"
+            />
+
+            <textarea 
+              value={createCode}
+              onChange={e => setCreateCode(e.target.value)}
+              placeholder="from engine.strategies.base import BaseStrategy..."
+              rows={12}
+              className="w-full bg-surface-container-lowest border border-white/10 p-3 rounded-lg text-on-surface font-body-md font-mono text-[13px] focus:border-primary focus:ring-0 outline-none transition-colors resize-none"
+            />
+            
+            <div className="flex justify-between items-center mt-2">
+              <span className="font-data-sm text-[11px] text-on-surface-variant opacity-70">
+                You can also ask the <a href="/ai-assistant" className="text-primary hover:underline">AI Assistant</a> to build one for you!
+              </span>
+              <div className="flex justify-end gap-3">
+                <button 
+                  onClick={() => setShowCreateModal(false)} 
+                  className="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors font-label-caps tracking-wide"
+                >
+                  Cancel
+                </button>
+                <button 
+                  disabled={!createName.trim() || !createCode.trim()}
+                  onClick={async () => {
+                     try {
+                        const res = await fetch('http://localhost:8000/api/custom-strategies', {
+                           method: 'POST',
+                           headers: {'Content-Type': 'application/json'},
+                           body: JSON.stringify({ name: createName.trim(), code: createCode })
+                        });
+                        if (res.ok) {
+                          setShowCreateModal(false);
+                          fetchStrategies(); // refresh list
+                        } else {
+                          const err = await res.json();
+                          alert(`Failed to save strategy: ${err.detail || 'Unknown error'}`);
+                        }
+                     } catch (e) {
+                        alert('Failed to connect to backend server');
+                     }
+                  }}
+                  className="px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity font-label-caps tracking-wide disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-[18px]">add</span>
+                  Create
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
