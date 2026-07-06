@@ -122,7 +122,7 @@ export default function AIAssistantPage() {
       const res = await fetch('http://localhost:8000/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputValue })
+        body: JSON.stringify({ message: inputValue, history: messages })
       });
       const data = await res.json();
       if (data.response) {

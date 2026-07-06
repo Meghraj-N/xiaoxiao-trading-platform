@@ -78,19 +78,25 @@ class AIEngine:
         return model
 
     async def _chat(self, system: str, user: str, model: str | None = None,
-                    temperature: float = 0.3, max_tokens: int = 2048) -> str:
+                    temperature: float = 0.3, max_tokens: int = 2048, history: list = None) -> str:
         """Send a chat completion request to NVIDIA NIM."""
         if not self.client:
             return json.dumps({"error": "AI not configured. Set NVIDIA_API_KEY in .env"})
 
         model_id = self._resolve_model(model)
+        
+        messages_payload = [{"role": "system", "content": system}]
+        if history:
+            for msg in history:
+                if msg.get("role") in ["user", "assistant"] and "text" in msg:
+                    messages_payload.append({"role": msg["role"], "content": msg["text"]})
+        
+        messages_payload.append({"role": "user", "content": user})
+        
         try:
             response = await self.client.chat.completions.create(
                 model=model_id,
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
+                messages=messages_payload,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
@@ -239,7 +245,7 @@ Analyze and suggest improvements. Be HONEST — if the strategy has no edge, say
         return await self._chat_json(system, user, model)
 
     async def chat(self, message: str, context: str = "",
-                   model: str | None = None) -> str:
+                   model: str | None = None, history: list = None) -> str:
         """
         Free-form chat with AI about trading.
         Returns raw text response (not JSON).
@@ -252,4 +258,4 @@ Analyze and suggest improvements. Be HONEST — if the strategy has no edge, say
 
 Be honest and direct. If something won't work, say so.
 {f"Context: {context}" if context else ""}"""
-        return await self._chat(system, message, model, temperature=0.5, max_tokens=1500)
+        return await self._chat(system, message, model, temperature=0.5, max_tokens=1500, history=history)

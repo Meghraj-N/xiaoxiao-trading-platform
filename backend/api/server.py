@@ -697,11 +697,12 @@ async def ai_chat(body: dict):
     message = body.get("message", "")
     model = body.get("model")
     context = body.get("context", "")
+    history = body.get("history", [])
 
     if not message:
         return {"error": "Provide a message"}
 
-    response = await ai_engine.chat(message, context, model)
+    response = await ai_engine.chat(message, context, model, history=history)
     return {"response": response, "model": ai_engine._resolve_model(model)}
 
 
