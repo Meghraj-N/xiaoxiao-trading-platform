@@ -2,14 +2,84 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
+type Message = { role: string; text: string };
+type ChatSession = { id: string; title: string; messages: Message[] };
+
 export default function AIAssistantPage() {
-  const [messages, setMessages] = useState([
-    { role: 'assistant', text: 'Based on current open interest, TSLA max pain for this Friday is hovering around $185. The Put/Call ratio is currently heavily skewed towards calls at the $190 strike, indicating significant resistance level.' }
-  ]);
+  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showCommands, setShowCommands] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  
+  // Is component mounted (for hydration)
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const saved = localStorage.getItem('ai_chat_sessions');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setSessions(parsed);
+        if (parsed.length > 0) {
+          setActiveSessionId(parsed[0].id);
+          setMessages(parsed[0].messages);
+        }
+      } catch (e) {}
+    } else {
+      const init: ChatSession = { 
+        id: Date.now().toString(), 
+        title: "Welcome", 
+        messages: [{ role: 'assistant', text: 'Hi Xiaoxiao! 👋\n\nHow can I help you today? Here are a few things we can dive into:\n\n- **Market analysis**\n- **Trading concepts**\n- **Strategy improvements**' }] 
+      };
+      setSessions([init]);
+      setActiveSessionId(init.id);
+      setMessages(init.messages);
+      localStorage.setItem('ai_chat_sessions', JSON.stringify([init]));
+    }
+  }, []);
+
+  // Sync messages to the active session
+  useEffect(() => {
+    if (!activeSessionId || !isMounted) return;
+    
+    setSessions(prev => {
+      const updated = prev.map(s => {
+        if (s.id === activeSessionId) {
+          let title = s.title;
+          if ((title === "New Chat" || title === "Welcome") && messages.length > 0) {
+            const firstUser = messages.find(m => m.role === 'user');
+            if (firstUser) {
+              title = firstUser.text.substring(0, 25) + (firstUser.text.length > 25 ? '...' : '');
+            }
+          }
+          return { ...s, title, messages };
+        }
+        return s;
+      });
+      localStorage.setItem('ai_chat_sessions', JSON.stringify(updated));
+      return updated;
+    });
+  }, [messages, activeSessionId, isMounted]);
+
+  const handleNewChat = () => {
+    const newId = Date.now().toString();
+    const newSession = { id: newId, title: "New Chat", messages: [] };
+    setSessions(prev => [newSession, ...prev]);
+    setActiveSessionId(newId);
+    setMessages([]);
+  };
+
+  const handleSwitchChat = (id: string) => {
+    const session = sessions.find(s => s.id === id);
+    if (session) {
+      setActiveSessionId(id);
+      setMessages(session.messages);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
@@ -55,6 +125,8 @@ export default function AIAssistantPage() {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
+  if (!isMounted) return null; // prevent hydration mismatch
+
   return (
     <div className="flex w-full h-[calc(100vh-64px)] overflow-hidden">
       
@@ -62,7 +134,7 @@ export default function AIAssistantPage() {
       <aside className="w-64 border-r border-white/5 bg-surface/30 backdrop-blur-md hidden md:flex flex-col h-full shrink-0">
         <div className="p-4 border-b border-white/5">
           <button 
-            onClick={() => setMessages([])}
+            onClick={handleNewChat}
             className="w-full flex items-center justify-center gap-2 border border-outline-variant hover:border-primary text-on-surface hover:text-primary rounded-lg py-2 transition-colors"
           >
             <span className="material-symbols-outlined text-[20px]">add</span>
@@ -71,21 +143,21 @@ export default function AIAssistantPage() {
         </div>
         
         <div className="flex-1 overflow-y-auto chat-scroll p-3 flex flex-col gap-1">
-          <h3 className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase px-2 pt-2 pb-1">Today</h3>
-          <button className="w-full text-left px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface font-body-md text-[14px] truncate flex items-center gap-2 border-l-2 border-primary">
-            <span className="material-symbols-outlined text-[16px] text-primary">chat_bubble</span>
-            TSLA Max Pain Analysis
-          </button>
-          <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-md text-[14px] truncate flex items-center gap-2">
-            <span className="material-symbols-outlined text-[16px]">chat_bubble</span>
-            AAPL Earnings Straddle
-          </button>
-          
-          <h3 className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase px-2 pt-4 pb-1">Saved Strategies</h3>
-          <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-md text-[14px] truncate flex items-center gap-2">
-            <span className="material-symbols-outlined text-[16px]">insights</span>
-            Delta Neutral Hedge
-          </button>
+          <h3 className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase px-2 pt-2 pb-1">Recent Chats</h3>
+          {sessions.map(s => (
+            <button 
+              key={s.id}
+              onClick={() => handleSwitchChat(s.id)}
+              className={`w-full text-left px-3 py-2 rounded-lg transition-colors font-body-md text-[14px] truncate flex items-center gap-2 ${
+                activeSessionId === s.id 
+                  ? 'bg-surface-container border-l-2 border-primary text-on-surface' 
+                  : 'hover:bg-surface-container-high text-on-surface-variant'
+              }`}
+            >
+              <span className={`material-symbols-outlined text-[16px] ${activeSessionId === s.id ? 'text-primary' : ''}`}>chat_bubble</span>
+              {s.title}
+            </button>
+          ))}
         </div>
       </aside>
 
@@ -211,3 +283,4 @@ export default function AIAssistantPage() {
     </div>
   );
 }
+
