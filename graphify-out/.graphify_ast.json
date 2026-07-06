@@ -1,0 +1,596 @@
+{
+  "nodes": [
+    {
+      "id": "frontend_src_app_app",
+      "label": "App",
+      "file_type": "code",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_ailab_ailab",
+      "label": "AILab",
+      "file_type": "code",
+      "source_file": "frontend/src/components/AILab.jsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_backtestcard_backtestcard",
+      "label": "BacktestCard",
+      "file_type": "code",
+      "source_file": "frontend/src/components/BacktestCard.jsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_equitycurve_equitycurve",
+      "label": "EquityCurve",
+      "file_type": "code",
+      "source_file": "frontend/src/components/EquityCurve.jsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_layout_layout",
+      "label": "Layout",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_optionsdashboard_optionsdashboard",
+      "label": "OptionsDashboard",
+      "file_type": "code",
+      "source_file": "frontend/src/components/OptionsDashboard.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_pricechart_pricechart",
+      "label": "PriceChart",
+      "file_type": "code",
+      "source_file": "frontend/src/components/PriceChart.jsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_riskgauge_riskgauge",
+      "label": "RiskGauge",
+      "file_type": "code",
+      "source_file": "frontend/src/components/RiskGauge.jsx",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_settingspanel_settingspanel",
+      "label": "SettingsPanel",
+      "file_type": "code",
+      "source_file": "frontend/src/components/SettingsPanel.jsx",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_statspanel_statspanel",
+      "label": "StatsPanel",
+      "file_type": "code",
+      "source_file": "frontend/src/components/StatsPanel.jsx",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_statusbadge_statusbadge",
+      "label": "StatusBadge",
+      "file_type": "code",
+      "source_file": "frontend/src/components/StatusBadge.jsx",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_strategybuilder_strategybuilder",
+      "label": "StrategyBuilder",
+      "file_type": "code",
+      "source_file": "frontend/src/components/StrategyBuilder.jsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_strategycard_strategycard",
+      "label": "StrategyCard",
+      "file_type": "code",
+      "source_file": "frontend/src/components/StrategyCard.jsx",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_tradetable_tradetable",
+      "label": "TradeTable",
+      "file_type": "code",
+      "source_file": "frontend/src/components/TradeTable.jsx",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_charts_equitychart_equitychart",
+      "label": "EquityChart",
+      "file_type": "code",
+      "source_file": "frontend/src/components/charts/EquityChart.jsx",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_charts_greekschart_greekschart",
+      "label": "GreeksChart",
+      "file_type": "code",
+      "source_file": "frontend/src/components/charts/GreeksChart.jsx",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_charts_optionchain_optionchain",
+      "label": "OptionChain",
+      "file_type": "code",
+      "source_file": "frontend/src/components/charts/OptionChain.jsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_hooks_useapi_useapi",
+      "label": "useApi",
+      "file_type": "code",
+      "source_file": "frontend/src/hooks/useApi.js",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_hooks_usewebsocket_usewebsocket",
+      "label": "useWebSocket",
+      "file_type": "code",
+      "source_file": "frontend/src/hooks/useWebSocket.js",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_formatcurrency",
+      "label": "formatCurrency",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_formatpercent",
+      "label": "formatPercent",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_formatdate",
+      "label": "formatDate",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_formatpnl",
+      "label": "formatPnl",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L44",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_shortensymbol",
+      "label": "shortenSymbol",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L59",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_formatters_formatcompact",
+      "label": "formatCompact",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/formatters.js",
+      "source_location": "L67",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_app_dashboard_page_maxpaindashboard",
+      "label": "MaxPainDashboard",
+      "file_type": "code",
+      "source_file": "web/src/app/dashboard/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_app_layout_rootlayout",
+      "label": "RootLayout",
+      "file_type": "code",
+      "source_file": "web/src/app/layout.tsx",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_app_options_page_optionchainspage",
+      "label": "OptionChainsPage",
+      "file_type": "code",
+      "source_file": "web/src/app/options/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_app_page_marketmallpage",
+      "label": "MarketMallPage",
+      "file_type": "code",
+      "source_file": "web/src/app/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_components_navbar_navbar",
+      "label": "Navbar",
+      "file_type": "code",
+      "source_file": "web/src/components/navbar.tsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_lib_utils_cn",
+      "label": "cn",
+      "file_type": "code",
+      "source_file": "web/src/lib/utils.ts",
+      "source_location": "L4",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_layout_layout",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_statspanel_statspanel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_pricechart_pricechart",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_equitycurve_equitycurve",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_tradetable_tradetable",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_strategycard_strategycard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_riskgauge_riskgauge",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_statusbadge_statusbadge",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_ailab_ailab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_strategybuilder_strategybuilder",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_optionsdashboard_optionsdashboard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_settingspanel_settingspanel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_components_charts_equitychart_equitychart",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_hooks_usewebsocket_usewebsocket",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_utils_formatters_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_utils_formatters_formatpnl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_ailab",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/AILab.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_layout",
+      "target": "frontend_src_components_statusbadge_statusbadge",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_layout",
+      "target": "frontend_src_utils_formatters_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_optionsdashboard",
+      "target": "frontend_src_components_charts_greekschart_greekschart",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/OptionsDashboard.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_optionsdashboard",
+      "target": "frontend_src_components_charts_optionchain_optionchain",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/OptionsDashboard.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_settingspanel",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/SettingsPanel.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_statspanel",
+      "target": "frontend_src_utils_formatters_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/StatsPanel.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_statspanel",
+      "target": "frontend_src_utils_formatters_formatpercent",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/StatsPanel.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_statspanel",
+      "target": "frontend_src_utils_formatters_formatpnl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/StatsPanel.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_strategybuilder",
+      "target": "frontend_src_components_backtestcard_backtestcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/StrategyBuilder.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_tradetable",
+      "target": "frontend_src_utils_formatters_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/TradeTable.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_tradetable",
+      "target": "frontend_src_utils_formatters_formatpnl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/TradeTable.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_components_tradetable",
+      "target": "frontend_src_utils_formatters_formatdate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/TradeTable.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "frontend_src_app_app",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_components_ui_animated_ai_chat",
+      "target": "web_src_lib_utils_cn",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/components/ui/animated-ai-chat.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_components_ui_button",
+      "target": "web_src_lib_utils_cn",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/components/ui/button.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_components_ui_card",
+      "target": "web_src_lib_utils_cn",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/components/ui/card.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

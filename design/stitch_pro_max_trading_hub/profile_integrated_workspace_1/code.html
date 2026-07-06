@@ -1,0 +1,442 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Profile Workspace - Orion Trading</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#1e1b1c",
+                      "tertiary-container": "#a9a2a3",
+                      "secondary-container": "#6f3c0d",
+                      "on-secondary-fixed-variant": "#6c3a0a",
+                      "secondary-fixed-dim": "#ffb780",
+                      "inverse-on-surface": "#32302e",
+                      "tertiary-fixed-dim": "#ccc5c6",
+                      "surface-tint": "#ffb4a3",
+                      "primary": "#ffb4a3",
+                      "inverse-primary": "#a53b22",
+                      "surface-container": "#211f1d",
+                      "tertiary-fixed": "#e9e1e2",
+                      "surface-variant": "#373432",
+                      "surface-container-highest": "#373432",
+                      "secondary-fixed": "#ffdcc4",
+                      "on-primary-fixed-variant": "#84240d",
+                      "on-primary-fixed": "#3d0700",
+                      "primary-fixed-dim": "#ffb4a3",
+                      "outline": "#a68b84",
+                      "primary-container": "#ff7e5f",
+                      "on-surface-variant": "#dec0b9",
+                      "on-error": "#690005",
+                      "surface-dim": "#151311",
+                      "on-secondary-container": "#f1a971",
+                      "background": "#151311",
+                      "primary-fixed": "#ffdad2",
+                      "surface-container-lowest": "#0f0e0c",
+                      "surface-container-high": "#2c2a27",
+                      "on-surface": "#e7e1de",
+                      "on-primary-container": "#721702",
+                      "surface": "#151311",
+                      "secondary": "#ffb780",
+                      "on-secondary": "#4e2600",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#3b3936",
+                      "on-tertiary": "#332f30",
+                      "on-error-container": "#ffdad6",
+                      "inverse-surface": "#e7e1de",
+                      "on-primary": "#621000",
+                      "on-tertiary-fixed-variant": "#4a4647",
+                      "on-tertiary-container": "#3d393a",
+                      "on-secondary-fixed": "#2f1400",
+                      "on-background": "#e7e1de",
+                      "surface-container-low": "#1d1b19",
+                      "outline-variant": "#57423d",
+                      "tertiary": "#ccc5c6",
+                      "error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "unit": "8px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Merriweather"],
+                      "data-sm": ["Ubuntu Mono"],
+                      "title-md": ["Montserrat"],
+                      "label-caps": ["Montserrat"],
+                      "headline-lg-mobile": ["Merriweather"],
+                      "headline-lg": ["Merriweather"],
+                      "data-lg": ["Ubuntu Mono"],
+                      "body-md": ["Montserrat"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                      "data-sm": ["14px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "data-lg": ["18px", {"lineHeight": "22px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+    <style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-bottom-color: theme('colors.primary');
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary-container'), theme('colors.secondary-container'));
+            color: theme('colors.on-primary-container');
+            transition: all 0.3s ease;
+        }
+        .btn-secondary {
+            background: rgba(255, 183, 128, 0.1);
+            border: 1px solid rgba(255, 183, 128, 0.2);
+            color: theme('colors.secondary');
+        }
+        .toggle-switch {
+            width: 36px;
+            height: 20px;
+            background: #373432;
+            border-radius: 99px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-switch.active {
+            background: theme('colors.primary');
+        }
+        .toggle-knob {
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+        .toggle-switch.active .toggle-knob {
+            transform: translateX(16px);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row font-body-md text-body-md overflow-x-hidden">
+
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container-low/60 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-between items-center h-16 px-gutter border-b border-white/5 shadow-[0_0_20px_rgba(255,180,163,0.05)]">
+    <div class="font-display-lg text-primary text-2xl tracking-tighter">ORION TRADING</div>
+    <button class="text-on-surface-variant/80 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
+</nav>
+
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex bg-surface-container-low/60 backdrop-blur-2xl fixed left-0 top-0 h-screen w-64 border-r border-white/5 flex-col py-6 px-4 z-40">
+    <div class="mb-10 px-2 flex flex-col items-start gap-4">
+        <div class="font-display-lg tracking-tighter text-primary text-3xl">ORION</div>
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30">
+                <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsvULo4WcziidZ9SBsdWZA5pNGKzPJGfRuMEdbvMX4pg1DBa_ILFsE31RDRpTl3i15IfNuX1cWA817GERs7xXjLNNwYXHn9rHWcZtKZYYufLuoWQ2YN4dQx9gEb-Lr2kPSFufL_Jhy4-AgPT-oSFFzrDNhN3tZoj_XfVBY0eQ4k-aGsJdkxplipDhAbCcaFnuHonbm_70IjVy99d4Hs41pKW9qFJOavpUvWdPSJswPEiaBnm2AlJ1iwA">
+            </div>
+            <div>
+                <div class="font-title-md text-on-surface text-sm">Pro Trader</div>
+                <div class="font-data-sm text-primary opacity-80 text-xs">Elite Tier</div>
+            </div>
+        </div>
+    </div>
+    <nav class="flex-1 flex flex-col gap-2">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]">query_stats</span> Analytics
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]">smart_toy</span> AI Agent
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]">storefront</span> Market Mall
+        </a>
+    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-[20px]">account_tree</span> Strategies</a></nav>
+    <div class="mt-auto flex flex-col gap-2 border-t border-white/5 pt-4">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/20 text-primary border-l-4 border-primary font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">person</span> Profile
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+            <span class="material-symbols-outlined text-[20px]">settings</span> Settings
+        </a>
+        <button class="mt-4 w-full py-3 rounded-lg btn-primary font-label-caps text-label-caps tracking-widest">
+            OPEN TRADE
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 pt-24 md:pt-12 px-margin-mobile md:px-margin-desktop pb-12 max-w-container-max mx-auto w-full min-h-screen">
+    <div class="flex flex-col gap-8">
+        <!-- Header -->
+        <header>
+            <h1 class="font-headline-lg text-on-surface mb-2">User Profile Workspace</h1>
+            <p class="text-on-surface-variant max-w-2xl">Integrate your social presence, manage privacy settings, and monitor your platform activity from a single pane.</p>
+        </header>
+
+        <!-- Dashboard Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+            
+            <!-- Left Pane: Profile Settings (Coral Accents) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                
+                <!-- Personal Info Card -->
+                <section class="glass-panel rounded-xl p-8 border-l-4 border-primary-container relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5">
+                        <span class="material-symbols-outlined text-[120px]">badge</span>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="w-32 h-32 rounded-xl bg-surface-variant overflow-hidden border-2 border-primary-container/30 group cursor-pointer relative">
+                                <img alt="User Avatar" class="w-full h-full object-cover transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsE4TdlyLcw5ZIBoBkEZ5qcvqdTKw7bPaHPvPW5Up8b_txoQDQhI6wkjyCVzz3ZiNETZ6Pb-zso0WPVyBND_2OJU9eAq9_YPYhF0SKX5xWxUb4BC2kxf9PtlhGKCUWBqJhlrDXojw7J0h0ZEvWoz9DrABAEv0-ctlmwf4GvcIzUutdXUBKhtsIYcCRPWfife45z-Cbvhpj-ozrJv_J6VV7-EQ_yq3kNvyIyNk4BD_rgLE08WOCK6QGIQ">
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                    <span class="material-symbols-outlined text-white">edit</span>
+                                </div>
+                            </div>
+                            <button class="text-primary-container font-label-caps text-[10px] uppercase tracking-tighter">Edit Photo</button>
+                        </div>
+                        
+                        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 w-full">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="font-label-caps text-on-surface-variant text-[10px] uppercase">Display Name</label>
+                                <input class="input-field w-full py-2 bg-transparent text-on-surface font-title-md border-0" type="text" value="Pro Trader">
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="font-label-caps text-on-surface-variant text-[10px] uppercase">Job Title</label>
+                                <input class="input-field w-full py-2 bg-transparent text-on-surface font-title-md border-0" type="text" value="Quantitative Analyst">
+                            </div>
+                            <div class="flex flex-col gap-1.5 md:col-span-2">
+                                <label class="font-label-caps text-on-surface-variant text-[10px] uppercase">Bio</label>
+                                <textarea class="input-field w-full py-2 bg-transparent text-on-surface font-body-md border-0 resize-none h-20" placeholder="Tell the community about your trading strategy...">Focusing on high-frequency algorithmic derivatives. 8 years in DeFi markets.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Visibility & Socials Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Visibility Section -->
+                    <section class="glass-panel rounded-xl p-6 flex flex-col gap-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary-container">visibility</span>
+                            <h2 class="font-title-md text-on-surface">Public Visibility</h2>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-title-md">Public Profile</span>
+                                    <span class="text-[11px] text-on-surface-variant">Allow others to see your stats</span>
+                                </div>
+                                <div class="toggle-switch active"><div class="toggle-knob"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-title-md">Portfolio Sharing</span>
+                                    <span class="text-[11px] text-on-surface-variant">Show active holdings</span>
+                                </div>
+                                <div class="toggle-switch"><div class="toggle-knob"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-title-md">Activity Status</span>
+                                    <span class="text-[11px] text-on-surface-variant">Show when you're online</span>
+                                </div>
+                                <div class="toggle-switch active"><div class="toggle-knob"></div></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Social Accounts Section -->
+                    <section class="glass-panel rounded-xl p-6 flex flex-col gap-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary-container">share</span>
+                            <h2 class="font-title-md text-on-surface">Linked Socials</h2>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center justify-between p-3 bg-surface-container-high rounded-lg border border-white/5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-[#1DA1F2]/20 flex items-center justify-center">
+                                        <svg class="w-4 h-4 fill-[#1DA1F2]" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+                                    </div>
+                                    <span class="text-xs font-title-md">@pro_trader_X</span>
+                                </div>
+                                <button class="text-[10px] font-label-caps text-on-surface-variant hover:text-error transition-colors">DISCONNECT</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-surface-container-high/40 rounded-lg border border-dashed border-outline-variant/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[16px] text-on-surface-variant">add</span>
+                                    </div>
+                                    <span class="text-xs text-on-surface-variant italic">Add Discord</span>
+                                </div>
+                                <button class="text-[10px] font-label-caps text-primary-container">CONNECT</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-surface-container-high/40 rounded-lg border border-dashed border-outline-variant/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[16px] text-on-surface-variant">add</span>
+                                    </div>
+                                    <span class="text-xs text-on-surface-variant italic">Add LinkedIn</span>
+                                </div>
+                                <button class="text-[10px] font-label-caps text-primary-container">CONNECT</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="flex justify-end pt-4">
+                    <button class="btn-primary px-8 py-3 rounded-lg font-label-caps text-sm tracking-widest flex items-center gap-2 shadow-xl shadow-primary-container/10">
+                        UPDATE FULL WORKSPACE
+                        <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Pane: Platform Activity (Peach Accents) -->
+            <div class="lg:col-span-4 flex flex-col gap-6">
+                
+                <!-- Activity Section -->
+                <section class="glass-panel rounded-xl p-6 border-t-4 border-secondary flex flex-col gap-6 h-full">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary">analytics</span>
+                            <h2 class="font-title-md text-on-surface">Platform Activity</h2>
+                        </div>
+                        <span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px] font-label-caps">LIVE</span>
+                    </div>
+
+                    <!-- Stats Quick Look -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-surface-container p-4 rounded-lg border border-white/5">
+                            <div class="text-[10px] text-on-surface-variant uppercase font-label-caps mb-1">Total Logins</div>
+                            <div class="text-xl font-data-lg text-secondary">482</div>
+                        </div>
+                        <div class="bg-surface-container p-4 rounded-lg border border-white/5">
+                            <div class="text-[10px] text-on-surface-variant uppercase font-label-caps mb-1">Active Time</div>
+                            <div class="text-xl font-data-lg text-secondary">124h</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Logins Timeline -->
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-xs font-label-caps text-on-surface-variant uppercase tracking-widest border-b border-outline-variant/20 pb-2">Recent Access</h3>
+                        
+                        <div class="space-y-5">
+                            <!-- Timeline Item -->
+                            <div class="flex gap-4 relative">
+                                <div class="absolute left-[7px] top-[24px] bottom-[-24px] w-[2px] bg-outline-variant/20"></div>
+                                <div class="w-4 h-4 rounded-full bg-secondary/30 flex items-center justify-center relative z-10">
+                                    <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs font-title-md text-on-surface">Desktop • Chrome 124</span>
+                                        <span class="text-[10px] font-data-sm text-on-surface-variant">Just now</span>
+                                    </div>
+                                    <p class="text-[11px] text-on-surface-variant mt-0.5">IP: 192.168.1.45 (New York, US)</p>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Item -->
+                            <div class="flex gap-4 relative">
+                                <div class="absolute left-[7px] top-[24px] bottom-[-24px] w-[2px] bg-outline-variant/20"></div>
+                                <div class="w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center relative z-10">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs font-title-md text-on-surface">Mobile • Orion App</span>
+                                        <span class="text-[10px] font-data-sm text-on-surface-variant">4h ago</span>
+                                    </div>
+                                    <p class="text-[11px] text-on-surface-variant mt-0.5">IP: 172.56.2.11 (Miami, US)</p>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Item -->
+                            <div class="flex gap-4">
+                                <div class="w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center relative z-10">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs font-title-md text-on-surface">API Node • Linux Server</span>
+                                        <span class="text-[10px] font-data-sm text-on-surface-variant">Oct 24</span>
+                                    </div>
+                                    <p class="text-[11px] text-on-surface-variant mt-0.5">IP: 104.24.1.200 (Frankfurt, DE)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Sessions -->
+                    <div class="mt-auto pt-6 border-t border-outline-variant/20">
+                        <h3 class="text-xs font-label-caps text-on-surface-variant uppercase mb-4">Active Sessions (3)</h3>
+                        <div class="bg-secondary/5 rounded-lg p-4 border border-secondary/10">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-secondary text-sm">devices</span>
+                                <span class="text-[11px] font-title-md">Current Workspace</span>
+                            </div>
+                            <button class="w-full btn-secondary py-2 rounded text-[10px] font-label-caps">LOGOUT ALL OTHER DEVICES</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Simple toggle interaction logic
+    document.querySelectorAll('.toggle-switch').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+        });
+    });
+</script>
+
+
+
+
+</body></html>

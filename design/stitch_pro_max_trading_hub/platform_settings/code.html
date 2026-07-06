@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Orion Trading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container": "#211f1d",
+                "surface": "#151311",
+                "on-secondary-fixed-variant": "#6c3a0a",
+                "surface-container-high": "#2c2a27",
+                "on-secondary": "#4e2600",
+                "on-primary-fixed-variant": "#84240d",
+                "primary-fixed-dim": "#ffb4a3",
+                "outline-variant": "#57423d",
+                "secondary": "#ffb780",
+                "surface-dim": "#151311",
+                "surface-tint": "#ffb4a3",
+                "on-error-container": "#ffdad6",
+                "on-surface-variant": "#dec0b9",
+                "on-tertiary-container": "#3d393a",
+                "secondary-container": "#6f3c0d",
+                "on-primary-container": "#721702",
+                "surface-variant": "#373432",
+                "secondary-fixed-dim": "#ffb780",
+                "surface-container-lowest": "#0f0e0c",
+                "on-tertiary-fixed-variant": "#4a4647",
+                "on-surface": "#e7e1de",
+                "on-secondary-fixed": "#2f1400",
+                "on-background": "#e7e1de",
+                "error": "#ffb4ab",
+                "background": "#151311",
+                "error-container": "#93000a",
+                "surface-container-highest": "#373432",
+                "tertiary-fixed-dim": "#ccc5c6",
+                "primary": "#ffb4a3",
+                "on-primary-fixed": "#3d0700",
+                "secondary-fixed": "#ffdcc4",
+                "tertiary-container": "#a9a2a3",
+                "surface-bright": "#3b3936",
+                "primary-fixed": "#ffdad2",
+                "outline": "#a68b84",
+                "on-error": "#690005",
+                "inverse-surface": "#e7e1de",
+                "inverse-on-surface": "#32302e",
+                "surface-container-low": "#1d1b19",
+                "tertiary-fixed": "#e9e1e2",
+                "on-primary": "#621000",
+                "primary-container": "#ff7e5f",
+                "tertiary": "#ccc5c6",
+                "on-tertiary": "#332f30",
+                "on-secondary-container": "#f1a971",
+                "inverse-primary": "#a53b22",
+                "on-tertiary-fixed": "#1e1b1c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "8px",
+                "container-max": "1440px",
+                "margin-mobile": "16px",
+                "margin-desktop": "40px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "label-caps": [
+                        "Montserrat"
+                ],
+                "title-md": [
+                        "Montserrat"
+                ],
+                "display-lg": [
+                        "Merriweather"
+                ],
+                "data-lg": [
+                        "Ubuntu Mono"
+                ],
+                "body-md": [
+                        "Montserrat"
+                ],
+                "headline-lg-mobile": [
+                        "Merriweather"
+                ],
+                "headline-lg": [
+                        "Merriweather"
+                ],
+                "data-sm": [
+                        "Ubuntu Mono"
+                ]
+        },
+        "fontSize": {
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "title-md": [
+                        "18px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "60px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "900"
+                        }
+                ],
+                "data-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "22px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "data-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "18px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+        .glass-panel-glow {
+            box-shadow: 0 4px 30px rgba(255, 180, 163, 0.05);
+        }
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-bottom-color: theme('colors.primary');
+            box-shadow: 0 4px 10px -4px rgba(255, 180, 163, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            color: theme('colors.on-primary');
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(255, 180, 163, 0.4);
+            transform: translateY(-1px);
+        }
+        .data-mono {
+            font-family: 'Ubuntu Mono', monospace;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container-low/60 dark:bg-surface-container-low/60 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-between items-center h-16 px-gutter border-b border-white/5 shadow-[0_0_20px_rgba(255,180,163,0.05)]">
+<div class="font-display-lg text-display-lg tracking-tighter text-primary dark:text-primary-fixed-dim text-2xl">ORION TRADING</div>
+<button class="text-on-surface-variant/80 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex bg-surface-container-low/60 dark:bg-surface-container-low/60 backdrop-blur-2xl fixed left-0 top-0 h-screen w-64 border-r border-white/5 flex-col py-6 px-4 z-40">
+<div class="mb-10 px-2 flex flex-col items-start gap-4">
+<div class="font-display-lg tracking-tighter text-primary text-3xl">ORION</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic texture with subtle warm coral lighting catching the edges, creating a sophisticated and premium material feel. High contrast, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsvULo4WcziidZ9SBsdWZA5pNGKzPJGfRuMEdbvMX4pg1DBa_ILFsE31RDRpTl3i15IfNuX1cWA817GERs7xXjLNNwYXHn9rHWcZtKZYYufLuoWQ2YN4dQx9gEb-Lr2kPSFufL_Jhy4-AgPT-oSFFzrDNhN3tZoj_XfVBY0eQ4k-aGsJdkxplipDhAbCcaFnuHonbm_70IjVy99d4Hs41pKW9qFJOavpUvWdPSJswPEiaBnm2AlJ1iwA"/>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface text-sm">Pro Trader</div>
+<div class="font-data-sm text-data-sm text-primary opacity-80 text-xs">Elite Tier</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/30 hover:bg-primary/10 transition-colors font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/30 hover:bg-primary/10 transition-colors font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/30 hover:bg-primary/10 transition-colors font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+                AI Agent
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/30 hover:bg-primary/10 transition-colors font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+                Market Mall
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-white/5 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/20 text-primary border-l-4 border-primary font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/30 hover:bg-primary/10 transition-colors font-label-caps text-label-caps active:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                Support
+            </a>
+<button class="mt-4 w-full py-3 rounded-DEFAULT btn-primary font-label-caps text-label-caps">
+                OPEN TRADE
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-20 md:pt-10 px-margin-mobile md:px-margin-desktop pb-24 max-w-container-max mx-auto w-full min-h-screen flex flex-col gap-8 relative z-10">
+<!-- Header -->
+<header class="flex flex-col gap-2">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">Settings</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Manage your account preferences, security settings, and API access.</p>
+</header>
+<!-- Settings Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Settings Navigation (Local) -->
+<div class="lg:col-span-3 flex flex-col gap-1 sticky top-24">
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg bg-surface-container-high text-primary font-title-md text-title-md text-sm border-l-2 border-primary text-left transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">person</span>
+                    Account Details
+                </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-title-md text-title-md text-sm border-l-2 border-transparent hover:border-outline-variant text-left transition-colors">
+<span class="material-symbols-outlined text-[20px]">security</span>
+                    Security
+                </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-title-md text-title-md text-sm border-l-2 border-transparent hover:border-outline-variant text-left transition-colors">
+<span class="material-symbols-outlined text-[20px]">key</span>
+                    API Keys
+                </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-title-md text-title-md text-sm border-l-2 border-transparent hover:border-outline-variant text-left transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+                    Notifications
+                </button>
+<button class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-title-md text-title-md text-sm border-l-2 border-transparent hover:border-outline-variant text-left transition-colors">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+                    Appearance
+                </button>
+</div>
+<!-- Settings Content Panels -->
+<div class="lg:col-span-9 flex flex-col gap-6">
+<!-- Account Panel -->
+<section class="glass-panel glass-panel-glow rounded-xl p-6 md:p-8 flex flex-col gap-6 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50 pointer-events-none"></div>
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4 relative z-10">
+<div>
+<h2 class="font-display-lg text-title-md text-on-surface">Profile Information</h2>
+<p class="text-on-surface-variant text-sm mt-1">Update your basic profile details.</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-start relative z-10 mt-2">
+<div class="flex flex-col items-center gap-4">
+<div class="w-24 h-24 rounded-full bg-surface-variant overflow-hidden border-2 border-primary/30 relative group cursor-pointer">
+<img alt="User Avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A close up view of a dark smooth obsidian stone surface, with a single bright light reflecting off the curved surface in a warm peach tone. Abstract and elegant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsE4TdlyLcw5ZIBoBkEZ5qcvqdTKw7bPaHPvPW5Up8b_txoQDQhI6wkjyCVzz3ZiNETZ6Pb-zso0WPVyBND_2OJU9eAq9_YPYhF0SKX5xWxUb4BC2kxf9PtlhGKCUWBqJhlrDXojw7J0h0ZEvWoz9DrABAEv0-ctlmwf4GvcIzUutdXUBKhtsIYcCRPWfife45z-Cbvhpj-ozrJv_J6VV7-EQ_yq3kNvyIyNk4BD_rgLE08WOCK6QGIQ"/>
+<div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">photo_camera</span>
+</div>
+</div>
+<button class="text-primary hover:text-secondary font-label-caps text-label-caps text-xs transition-colors">Change Avatar</button>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">First Name</label>
+<input class="input-field w-full py-2 font-title-md text-on-surface px-1 bg-transparent text-sm" type="text" value="Pro"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Last Name</label>
+<input class="input-field w-full py-2 font-title-md text-on-surface px-1 bg-transparent text-sm" type="text" value="Trader"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Email Address</label>
+<input class="input-field w-full py-2 font-title-md text-on-surface px-1 bg-transparent text-sm text-on-surface/70" disabled="" type="email" value="pro.trader@orion.com"/>
+<p class="text-[10px] text-on-surface-variant mt-1">Email changes require security verification.</p>
+</div>
+</div>
+</div>
+<div class="flex justify-end pt-4 relative z-10">
+<button class="btn-primary px-6 py-2 rounded-DEFAULT font-label-caps text-label-caps text-sm tracking-widest">
+                            SAVE CHANGES
+                        </button>
+</div>
+</section>
+<!-- API Keys Panel -->
+<section class="glass-panel rounded-xl p-6 md:p-8 flex flex-col gap-6 relative">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-4">
+<div>
+<h2 class="font-display-lg text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">api</span>
+                                API Management
+                            </h2>
+<p class="text-on-surface-variant text-sm mt-1">Manage keys for algorithmic trading and external access.</p>
+</div>
+<button class="btn-primary px-4 py-2 rounded-DEFAULT font-label-caps text-label-caps text-xs transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                            NEW KEY
+                        </button>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Key Item -->
+<div class="bg-surface-container/50 border border-white/5 rounded-lg p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1 w-full md:w-auto">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-on-surface text-sm">Production Quant Bot</span>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded-full text-[10px] font-label-caps uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-3">
+<code class="font-data-sm text-data-sm text-on-surface-variant/70 text-xs">pk_live_*************************9a8f</code>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Copy Key">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="text-[10px] text-on-surface-variant/50 mt-1">Last used: 2 mins ago • Created: Oct 12, 2023</div>
+</div>
+<div class="flex gap-2 w-full md:w-auto justify-end">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Revoke Key">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Key Item -->
+<div class="bg-surface-container/50 border border-white/5 rounded-lg p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 opacity-75">
+<div class="flex flex-col gap-1 w-full md:w-auto">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-on-surface text-sm">Testing Environment</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded-full text-[10px] font-label-caps uppercase tracking-wider">Read Only</span>
+</div>
+<div class="flex items-center gap-3">
+<code class="font-data-sm text-data-sm text-on-surface-variant/70 text-xs">pk_test_*************************3b2c</code>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Copy Key">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="text-[10px] text-on-surface-variant/50 mt-1">Last used: 5 days ago • Created: Sep 01, 2023</div>
+</div>
+<div class="flex gap-2 w-full md:w-auto justify-end">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Revoke Key">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Appearance Panel -->
+<section class="glass-panel rounded-xl p-6 md:p-8 flex flex-col gap-6">
+<div class="border-b border-outline-variant/30 pb-4">
+<h2 class="font-display-lg text-title-md text-on-surface">Appearance</h2>
+<p class="text-on-surface-variant text-sm mt-1">Customize your platform interface.</p>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col gap-1">
+<span class="font-title-md text-on-surface text-sm">Theme Preference</span>
+<span class="text-on-surface-variant text-xs">Switch between dark and light modes.</span>
+</div>
+<div class="bg-surface-container rounded-full p-1 flex items-center border border-outline-variant/30">
+<button class="px-3 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-title-md flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">light_mode</span>
+                                Light
+                            </button>
+<button class="px-3 py-1.5 rounded-full bg-primary-container/20 text-primary border border-primary/20 text-xs font-title-md flex items-center gap-2 transition-colors shadow-[0_0_10px_rgba(255,180,163,0.1)]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">dark_mode</span>
+                                Dark
+                            </button>
+<button class="px-3 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-title-md flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">desktop_windows</span>
+                                System
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #151311;
+    --foreground: #e7e1de;
+    --card: #151311;
+    --card-foreground: #e7e1de;
+    --popover: #151311;
+    --popover-foreground: #e7e1de;
+    --primary: #ffb4a3;
+    --primary-foreground: #621000;
+    --secondary: #ffb780;
+    --secondary-foreground: #4e2600;
+    --muted: #373432;
+    --muted-foreground: #dec0b9;
+    --accent: #ffb4a3;
+    --accent-foreground: #621000;
+    --destructive: #ffb4ab;
+    --destructive-foreground: #690005;
+    --border: #57423d;
+    --input: #373432;
+    --ring: #ffb4a3;
+    --radius: 0.5rem;
+
+    --on-error-container: #ffdad6;
+    --inverse-surface: #e7e1de;
+    --on-tertiary-container: #3d393a;
+    --surface-bright: #3b3936;
+    --secondary-container: #6f3c0d;
+    --on-tertiary-fixed: #1e1b1c;
+    --error-container: #93000a;
+    --surface: #151311;
+    --primary-container: #ff7e5f;
+    --inverse-on-surface: #32302e;
+    --surface-tint: #ffb4a3;
+    --tertiary-fixed: #e9e1e2;
+    --tertiary-container: #a9a2a3;
+    --primary-fixed-dim: #ffb4a3;
+    --tertiary-fixed-dim: #ccc5c6;
+    --on-surface: #e7e1de;
+    --outline-variant: #57423d;
+    --on-tertiary: #332f30;
+    --surface-dim: #151311;
+    --outline: #a68b84;
+    --inverse-primary: #a53b22;
+    --surface-container-highest: #373432;
+    --secondary-fixed: #ffdcc4;
+    --secondary-fixed-dim: #ffb780;
+    --on-tertiary-fixed-variant: #4a4647;
+    --on-primary-container: #721702;
+    --primary-fixed: #ffdad2;
+    --surface-container-lowest: #0f0e0c;
+    --on-secondary-container: #f1a971;
+    --surface-container-low: #1d1b19;
+    --tertiary: #ccc5c6;
+    --on-secondary-fixed-variant: #6c3a0a;
+    --surface-container-high: #2c2a27;
+    --surface-variant: #373432;
+    --on-secondary-fixed: #2f1400;
+    --on-primary-fixed-variant: #84240d;
+    --surface-container: #211f1d;
+    --on-primary-fixed: #3d0700;
+    --on-surface-variant: #dec0b9;
+    --on-secondary: #4e2600;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body-md antialiased overflow-x-hidden selection:bg-primary/30 selection:text-primary;
+  }
+  
+  /* Custom Scrollbar for dark theme */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #151311; }
+  ::-webkit-scrollbar-thumb { background: #373432; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #57423d; }
+}
+
+@layer utilities {
+  .glass-panel {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(135deg, rgba(59, 57, 54, 0.4) 0%, rgba(29, 27, 25, 0.4) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .glass-card-hover {
+    transition: all 0.3s ease;
+  }
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 180, 163, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 180, 163, 0.3);
+  }
+  
+  .btn-primary-glow {
+    background: linear-gradient(90deg, #ffb4a3, #ffb780);
+    transition: all 0.3s ease;
+  }
+  .btn-primary-glow:hover {
+    box-shadow: 0 0 20px rgba(255, 180, 163, 0.6);
+    filter: brightness(1.1);
+  }
+}
+
+@theme inline {
+  --font-headline-lg: Merriweather, serif;
+  --font-title-md: Montserrat, sans-serif;
+  --font-data-sm: Ubuntu Mono, monospace;
+  --font-display-lg: Merriweather, serif;
+  --font-headline-lg-mobile: Merriweather, serif;
+  --font-data-lg: Ubuntu Mono, monospace;
+  --font-label-caps: Montserrat, sans-serif;
+  --font-body-md: Montserrat, sans-serif;
+  
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 24px;
+  --spacing-unit: 8px;
+  --spacing-container-max: 1440px;
+  --spacing-margin-desktop: 40px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-on-error-container: var(--on-error-container);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-surface-bright: var(--surface-bright);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-error-container: var(--error-container);
+  --color-surface: var(--surface);
+  --color-primary-container: var(--primary-container);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-surface-tint: var(--surface-tint);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-surface: var(--on-surface);
+  --color-outline-variant: var(--outline-variant);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-surface-dim: var(--surface-dim);
+  --color-outline: var(--outline);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-tertiary: var(--tertiary);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-variant: var(--surface-variant);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+  --color-surface-container: var(--surface-container);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-on-secondary: var(--on-secondary);
+}

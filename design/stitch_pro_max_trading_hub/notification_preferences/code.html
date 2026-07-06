@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification Preferences - Orion Trading</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad2",
+                        "surface-container-high": "#2c2a27",
+                        "outline": "#a68b84",
+                        "on-primary-fixed-variant": "#84240d",
+                        "secondary-container": "#6f3c0d",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#373432",
+                        "secondary": "#ffb780",
+                        "on-background": "#e7e1de",
+                        "on-tertiary-container": "#3d393a",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "inverse-surface": "#e7e1de",
+                        "tertiary-fixed": "#e9e1e2",
+                        "surface-dim": "#151311",
+                        "on-tertiary-fixed-variant": "#4a4647",
+                        "on-surface": "#e7e1de",
+                        "surface": "#151311",
+                        "inverse-primary": "#a53b22",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#332f30",
+                        "surface-container": "#211f1d",
+                        "primary": "#ffb4a3",
+                        "primary-container": "#ff7e5f",
+                        "on-primary": "#621000",
+                        "surface-container-lowest": "#0f0e0c",
+                        "on-secondary-fixed": "#2f1400",
+                        "background": "#151311",
+                        "surface-bright": "#3b3936",
+                        "surface-container-low": "#1d1b19",
+                        "tertiary": "#ccc5c6",
+                        "on-secondary-fixed-variant": "#6c3a0a",
+                        "surface-tint": "#ffb4a3",
+                        "tertiary-container": "#a9a2a3",
+                        "on-secondary": "#4e2600",
+                        "secondary-fixed": "#ffdcc4",
+                        "on-surface-variant": "#dec0b9",
+                        "secondary-fixed-dim": "#ffb780",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#1e1b1c",
+                        "on-secondary-container": "#f1a971",
+                        "surface-variant": "#373432",
+                        "on-primary-fixed": "#3d0700",
+                        "inverse-on-surface": "#32302e",
+                        "outline-variant": "#57423d",
+                        "on-primary-container": "#721702",
+                        "tertiary-fixed-dim": "#ccc5c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Merriweather"],
+                        "headline-lg": ["Merriweather"],
+                        "data-lg": ["Ubuntu Mono"],
+                        "body-md": ["Montserrat"],
+                        "data-sm": ["Ubuntu Mono"],
+                        "title-md": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "display-lg": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "data-lg": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "data-sm": ["14px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 0 20px rgba(255, 180, 163, 0.05);
+        }
+        
+        .glass-card-pro {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(21, 19, 17, 1), rgba(21, 19, 17, 1)), linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: inset 0 0 20px rgba(255, 180, 163, 0.05);
+        }
+
+        .glow-active {
+            box-shadow: 0 0 20px rgba(255, 180, 163, 0.15);
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #ffb4a3;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #ffb4a3;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 180, 163, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 180, 163, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen overflow-x-hidden flex selection:bg-primary selection:text-on-primary">
+<!-- Ambient Background Blur -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] mix-blend-screen"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/5 rounded-full blur-[150px] mix-blend-screen"></div>
+</div>
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden lg:flex flex-col pt-20 pb-10 px-4 w-64 z-30 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-2xl border-r border-white/10 shadow-2xl fixed left-0 top-0 h-full">
+<div class="mb-10 px-4 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary p-[2px] mb-4">
+<img alt="Trading Portfolio Avatar" class="w-full h-full rounded-full object-cover border-2 border-surface" data-alt="A highly detailed close-up portrait of a professional trader in a dark, high-end trading environment. Warm cinematic lighting highlights their determined expression. The background features subtle, blurred trading monitors with coral and peach charts. 8k resolution, photorealistic, cinematic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyn_YAGoBBVClUZHCdLjRcAa8ESM4U3PWbmzsneNV7v0XSRVwz_yJSQwkCCyfHDVfxzSLMkMARirO5hzlJiz3VRjXFgw2MgAsqVE7Lnh60dVAnNNA8-B5elvDGpOwHS9OtWXNENneUm1bmX97ZBdnu6g5557PYPXSR6mLFQvGPZnaM6UymY3LeGqSN3-lY6CFOKYVV6zRyHDg6PNoRpK1-DTfuIrS_BY2O3IRhctupyUr3yws3Lzjniw"/>
+</div>
+<div class="font-title-md text-title-md text-on-surface">Pro Trader</div>
+<div class="font-body-md text-data-sm text-primary mt-1">Verified Account</div>
+</div>
+<div class="flex-1 flex flex-col gap-unit">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">security</span>
+<span class="font-title-md text-title-md text-sm">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">vpn_key</span>
+<span class="font-title-md text-title-md text-sm">API Keys</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-primary/20 to-transparent text-primary border-l-4 border-primary font-bold hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="font-title-md text-title-md text-sm">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">palette</span>
+<span class="font-title-md text-title-md text-sm">Appearance</span>
+</a>
+</div>
+<div class="mt-auto px-4">
+<button class="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:shadow-[0_0_20px_rgba(255,180,163,0.4)] transition-shadow duration-300">
+                Upgrade to VIP
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 relative z-10 p-margin-mobile lg:p-margin-desktop min-h-screen">
+<!-- Header -->
+<header class="mb-gutter flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg-mobile lg:font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface tracking-tight">Notification Preferences</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">Configure how and when you receive alerts from Orion Trading. Prioritize critical market moves while minimizing noise.</p>
+</div>
+<button class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant/30 hover:bg-surface-bright transition-colors text-primary font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                Save Changes
+            </button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Channel Selection (Spans 12 col on mobile, 4 on desktop) -->
+<div class="md:col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card-pro rounded-xl p-6 glow-active">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cell_tower</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Delivery Channels</h2>
+</div>
+<div class="space-y-4">
+<!-- Email -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">mail</span>
+<div>
+<div class="font-title-md text-sm text-on-surface">Email</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant/70">trader@example.com</div>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="channel-email" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="channel-email"></label>
+</div>
+</div>
+<!-- SMS -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">sms</span>
+<div>
+<div class="font-title-md text-sm text-on-surface">SMS</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant/70">+1 (555) 019-2834</div>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="channel-sms" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="channel-sms"></label>
+</div>
+</div>
+<!-- Push -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">notifications</span>
+<div>
+<div class="font-title-md text-sm text-on-surface">Push Notifications</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant/70">Mobile App</div>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="channel-push" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="channel-push"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Quiet Hours -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-secondary/10 rounded-full blur-[40px] pointer-events-none"></div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container/50 flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined">nightlight</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Quiet Hours</h2>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="dnd-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="dnd-toggle"></label>
+</div>
+</div>
+<div class="space-y-4 opacity-50 pointer-events-none" id="dnd-settings">
+<div class="flex gap-4">
+<div class="flex-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block">From</label>
+<input class="w-full bg-surface-container-lowest border-b border-outline-variant/30 text-on-surface font-data-lg focus:border-primary focus:ring-0 px-0 py-2 bg-transparent transition-colors" type="time" value="22:00"/>
+</div>
+<div class="flex-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block">To</label>
+<input class="w-full bg-surface-container-lowest border-b border-outline-variant/30 text-on-surface font-data-lg focus:border-primary focus:ring-0 px-0 py-2 bg-transparent transition-colors" type="time" value="06:00"/>
+</div>
+</div>
+<div class="text-xs text-on-surface-variant/60 font-body-md mt-2">
+                            Critical security alerts will always bypass quiet hours.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Toggles (Spans 12 col on mobile, 8 on desktop) -->
+<div class="md:col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Trading Alerts -->
+<div class="glass-card-pro rounded-xl p-6 relative">
+<div class="absolute -left-10 -bottom-10 w-40 h-40 bg-primary/10 rounded-full blur-[50px] pointer-events-none"></div>
+<h2 class="font-headline-lg-mobile text-xl text-primary tracking-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">candlestick_chart</span>
+                        Trading Alerts
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+<!-- Order Fills -->
+<div class="p-4 rounded-lg border border-outline-variant/20 bg-surface-container-lowest/50 hover:border-primary/30 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Order Fills</div>
+<div class="relative inline-block w-12 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="alert-fills" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="alert-fills"></label>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant/80">Get notified immediately when your limit or stop orders execute.</p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary font-label-caps text-[10px]">PUSH</span>
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-caps text-[10px]">EMAIL</span>
+</div>
+</div>
+<!-- Price Alerts -->
+<div class="p-4 rounded-lg border border-outline-variant/20 bg-surface-container-lowest/50 hover:border-primary/30 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Price Targets</div>
+<div class="relative inline-block w-12 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="alert-price" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="alert-price"></label>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant/80">Alerts when tracked assets cross your specified price thresholds.</p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary font-label-caps text-[10px]">PUSH</span>
+<span class="px-2 py-1 rounded bg-secondary/10 text-secondary font-label-caps text-[10px]">SMS</span>
+</div>
+</div>
+<!-- Margin Calls -->
+<div class="p-4 rounded-lg border border-error/20 bg-error-container/10 hover:border-error/40 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="font-title-md text-title-md text-error flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                                    Margin Calls
+                                </div>
+<div class="relative inline-block w-12 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-error appearance-none cursor-not-allowed z-10 transition-transform duration-200 ease-in-out" disabled="" id="alert-margin" name="toggle" style="right: 0; background-color: #ffb4ab; border-color: white;" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-error-container cursor-not-allowed transition-colors duration-200 ease-in-out" for="alert-margin"></label>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant/80">Critical alerts if account equity falls below maintenance margin. <span class="text-error/80 text-xs block mt-1">Cannot be disabled.</span></p>
+<div class="mt-2 flex gap-2">
+<span class="px-2 py-1 rounded bg-error/20 text-error font-label-caps text-[10px]">ALL CHANNELS</span>
+</div>
+</div>
+<!-- Portfolio Changes -->
+<div class="p-4 rounded-lg border border-outline-variant/20 bg-surface-container-lowest/50 hover:border-primary/30 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Daily Summary</div>
+<div class="relative inline-block w-12 align-middle select-none">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="alert-portfolio" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="alert-portfolio"></label>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant/80">Daily digest of portfolio performance and major market movers.</p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-caps text-[10px]">EMAIL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Notifications -->
+<div class="glass-card rounded-xl p-6">
+<h2 class="font-headline-lg-mobile text-xl text-on-surface tracking-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">settings_system_daydream</span>
+                        System &amp; Account
+                    </h2>
+<div class="space-y-1">
+<!-- Security -->
+<div class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group border-b border-outline-variant/10">
+<div class="pr-4">
+<div class="font-title-md text-title-md text-on-surface mb-1 flex items-center gap-2">
+                                    Security Alerts
+                                    <span class="material-symbols-outlined text-[14px] text-primary" title="Required">info</span>
+</div>
+<div class="font-body-md text-sm text-on-surface-variant/70">New logins, password changes, and 2FA activities.</div>
+</div>
+<div class="relative inline-block w-12 shrink-0 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-primary border-2 border-white appearance-none cursor-not-allowed z-10 transition-transform duration-200 ease-in-out" disabled="" id="sys-security" name="toggle" style="right:0;" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary-container cursor-not-allowed transition-colors duration-200 ease-in-out" for="sys-security"></label>
+</div>
+</div>
+<!-- Updates -->
+<div class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group border-b border-outline-variant/10">
+<div class="pr-4">
+<div class="font-title-md text-title-md text-on-surface mb-1">Product Updates</div>
+<div class="font-body-md text-sm text-on-surface-variant/70">New features, platform maintenance, and trading tool releases.</div>
+</div>
+<div class="relative inline-block w-12 shrink-0 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="sys-updates" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="sys-updates"></label>
+</div>
+</div>
+<!-- Marketing -->
+<div class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group">
+<div class="pr-4">
+<div class="font-title-md text-title-md text-on-surface mb-1">Promotions &amp; Offers</div>
+<div class="font-body-md text-sm text-on-surface-variant/70">Fee discounts, trading competitions, and exclusive partner offers.</div>
+</div>
+<div class="relative inline-block w-12 shrink-0 align-middle select-none">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="sys-marketing" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-low cursor-pointer transition-colors duration-200 ease-in-out" for="sys-marketing"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Mobile Save Button -->
+<button class="md:hidden w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-on-primary font-label-caps text-label-caps uppercase shadow-[0_0_15px_rgba(255,180,163,0.3)]">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                    Save Preferences
+                </button>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to toggle DND opacity
+        const dndToggle = document.getElementById('dnd-toggle');
+        const dndSettings = document.getElementById('dnd-settings');
+
+        dndToggle.addEventListener('change', function() {
+            if(this.checked) {
+                dndSettings.style.opacity = '1';
+                dndSettings.style.pointerEvents = 'auto';
+            } else {
+                dndSettings.style.opacity = '0.5';
+                dndSettings.style.pointerEvents = 'none';
+            }
+        });
+    </script>
+</body></html>

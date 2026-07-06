@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Simulated AI Chat Component with Framer Motion logic (Vanilla JS implementation)
+const container = document.querySelector('#ai-chat-container');
+
+class AIChat {
+  constructor(container) {
+    this.container = container;
+    this.messages = [];
+    this.isThinking = false;
+    this.init();
+  }
+
+  init() {
+    this.render();
+    this.setupListeners();
+  }
+
+  setupListeners() {
+    const textarea = this.container.querySelector('textarea');
+    const commandPalette = this.container.querySelector('#command-palette');
+    const glow = this.container.querySelector('#mouse-glow');
+
+    textarea.addEventListener('input', (e) => {
+      // Auto-resize
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+
+      // Slash command detection
+      if (e.target.value.startsWith('/')) {
+        commandPalette.classList.remove('hidden');
+      } else {
+        commandPalette.classList.add('hidden');
+      }
+    });
+
+    textarea.addEventListener('focus', () => {
+      glow.style.opacity = '1';
+    });
+
+    textarea.addEventListener('blur', () => {
+      glow.style.opacity = '0';
+    });
+
+    this.container.addEventListener('mousemove', (e) => {
+      const rect = this.container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      glow.style.transform = `translate(${x - 100}px, ${y - 100}px)`;
+    });
+    
+    this.container.querySelector('#send-btn').addEventListener('click', () => this.handleSend());
+  }
+
+  handleSend() {
+    const textarea = this.container.querySelector('textarea');
+    const text = textarea.value.trim();
+    if (!text) return;
+
+    this.addMessage(text, 'user');
+    textarea.value = '';
+    textarea.style.height = 'auto';
+    
+    this.showThinking();
+    setTimeout(() => {
+      this.hideThinking();
+      this.addMessage("I'm analyzing the market data for you. Based on the current open interest, the Max Pain point is shifting.", 'ai');
+    }, 2000);
+  }
+
+  addMessage(text, role) {
+    const list = this.container.querySelector('#message-list');
+    const msg = document.createElement('div');
+    msg.className = `p-4 rounded-2xl mb-4 max-w-[80%] ${role === 'user' ? 'bg-primary text-white self-end ml-auto' : 'bg-surface-container-low text-on-surface'}`;
+    msg.textContent = text;
+    list.appendChild(msg);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  showThinking() {
+    this.container.querySelector('#typing-indicator').classList.remove('hidden');
+  }
+
+  hideThinking() {
+    this.container.querySelector('#typing-indicator').classList.add('hidden');
+  }
+
+  render() {
+    // Basic structure is handled in the main HTML, this class manages logic
+  }
+}
+
+new AIChat(container);
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+</body>
+</html>

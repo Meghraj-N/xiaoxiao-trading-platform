@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Appearance Settings - Orion Trading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad2",
+                        "surface-container-high": "#2c2a27",
+                        "outline": "#a68b84",
+                        "on-primary-fixed-variant": "#84240d",
+                        "secondary-container": "#6f3c0d",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#373432",
+                        "secondary": "#ffb780",
+                        "on-background": "#e7e1de",
+                        "on-tertiary-container": "#3d393a",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "inverse-surface": "#e7e1de",
+                        "tertiary-fixed": "#e9e1e2",
+                        "surface-dim": "#151311",
+                        "on-tertiary-fixed-variant": "#4a4647",
+                        "on-surface": "#e7e1de",
+                        "surface": "#151311",
+                        "inverse-primary": "#a53b22",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#332f30",
+                        "surface-container": "#211f1d",
+                        "primary": "#ffb4a3",
+                        "primary-container": "#ff7e5f",
+                        "on-primary": "#621000",
+                        "surface-container-lowest": "#0f0e0c",
+                        "on-secondary-fixed": "#2f1400",
+                        "background": "#151311",
+                        "surface-bright": "#3b3936",
+                        "surface-container-low": "#1d1b19",
+                        "tertiary": "#ccc5c6",
+                        "on-secondary-fixed-variant": "#6c3a0a",
+                        "surface-tint": "#ffb4a3",
+                        "tertiary-container": "#a9a2a3",
+                        "on-secondary": "#4e2600",
+                        "secondary-fixed": "#ffdcc4",
+                        "on-surface-variant": "#dec0b9",
+                        "secondary-fixed-dim": "#ffb780",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#1e1b1c",
+                        "on-secondary-container": "#f1a971",
+                        "surface-variant": "#373432",
+                        "on-primary-fixed": "#3d0700",
+                        "inverse-on-surface": "#32302e",
+                        "outline-variant": "#57423d",
+                        "on-primary-container": "#721702",
+                        "tertiary-fixed-dim": "#ccc5c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Merriweather"],
+                        "headline-lg": ["Merriweather"],
+                        "data-lg": ["Ubuntu Mono"],
+                        "body-md": ["Montserrat"],
+                        "data-sm": ["Ubuntu Mono"],
+                        "title-md": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "display-lg": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "data-lg": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "data-sm": ["14px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(33, 31, 29, 0.6); /* surface-container */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .glass-card-pro {
+            background-color: rgba(33, 31, 29, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(33, 31, 29, 0.6), rgba(33, 31, 29, 0.6)), linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #ffb4a3, #ffb780);
+            box-shadow: 0 4px 15px rgba(255, 180, 163, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(255, 180, 163, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffb4a3;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(255, 180, 163, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #373432;
+            border-radius: 2px;
+        }
+        
+        .radio-custom:checked + div {
+            border-color: #ffb4a3;
+            box-shadow: 0 0 15px rgba(255, 180, 163, 0.2);
+        }
+        
+        .color-swatch.active {
+            border: 2px solid #ffb4a3;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-primary selection:text-on-primary overflow-x-hidden relative">
+<!-- Ambient Background Blur -->
+<div class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-1/2 h-1/2 bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-1/2 h-1/2 bg-secondary/5 rounded-full blur-[120px]"></div>
+</div>
+<!-- SideNavBar (Predicted Component) -->
+<nav class="hidden lg:flex flex-col pt-20 pb-10 px-4 w-64 z-30 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-2xl border-r border-white/10 shadow-2xl fixed left-0 top-0 h-full">
+<!-- Brand / Profile -->
+<div class="mb-8 px-4 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-primary/20 p-1">
+<img alt="Trading Portfolio Avatar" class="w-full h-full object-cover rounded-full" data-alt="A futuristic, high-resolution portrait avatar of a professional trader. The portrait uses dramatic, warm glassmorphism lighting with soft peach and coral reflections against a deep charcoal background. The subject exudes calm confidence, suited for a premium fintech dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVr-ST9J2YPoAb5wBgXJtZH-HSle5NkKT3bT0JdAUE-54-yFSp6X6n6fFg1Dh4Xyot8awfBYmeOW2dSD_62ARYog1KLfMb9tU4Asu3qMeHz13CAgBpr_E6h1Rf4wFAKISpL03JyH3RbLR2f4onv3O9CPKEXIg4sVCIzRvgtnvvNHXjNdOlffUwugS3MmwUx1VU6by5VU_T-IfElt4UZcHs2GIlWm7cKwG7FW6zJUZswkpsDEbrJW65LA"/>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Pro Trader</h2>
+<p class="font-label-caps text-label-caps text-primary/70 mt-1">Verified Account</p>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-title-md text-title-md">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined">vpn_key</span>
+<span class="font-title-md text-title-md">API Keys</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-title-md text-title-md">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-primary/20 to-transparent text-primary border-l-4 border-primary font-bold hover:backdrop-brightness-125 transition-all duration-300 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">palette</span>
+<span class="font-title-md text-title-md">Appearance</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="mt-auto px-4">
+<button class="w-full py-3 rounded-lg btn-primary text-on-primary font-label-caps text-label-caps flex items-center justify-center gap-2">
+<span>Upgrade to VIP</span>
+<span class="material-symbols-outlined text-sm">workspace_premium</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 relative z-10 p-margin-mobile md:p-margin-desktop min-h-screen">
+<!-- Header -->
+<header class="mb-gutter flex justify-between items-center">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2 tracking-tight">Appearance Settings</h1>
+<p class="text-on-surface-variant">Customize your trading environment for optimal focus and minimal fatigue.</p>
+</div>
+<div class="hidden md:flex gap-3">
+<button class="px-6 py-2 rounded-lg border border-outline/30 text-on-surface hover:bg-white/5 transition-colors font-title-md text-title-md">Reset to Default</button>
+<button class="px-6 py-2 rounded-lg btn-primary text-on-primary font-title-md text-title-md">Save Changes</button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Theme Selection (Spans 8 cols) -->
+<section class="lg:col-span-8 glass-card-pro rounded-xl p-6">
+<h3 class="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">contrast</span>
+                    Theme Preference
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Dark Theme (Active) -->
+<label class="cursor-pointer group">
+<input checked="" class="peer sr-only radio-custom" name="theme" type="radio" value="dark"/>
+<div class="border border-outline/30 rounded-lg p-1 transition-all duration-300 group-hover:border-primary/50 relative overflow-hidden bg-surface-container-highest">
+<!-- Preview Graphic -->
+<div class="h-24 bg-[#151311] rounded-md mb-3 p-2 flex flex-col gap-2 relative z-10">
+<div class="h-2 w-1/3 bg-[#373432] rounded"></div>
+<div class="flex-1 flex gap-2">
+<div class="w-8 h-full bg-[#373432] rounded"></div>
+<div class="flex-1 h-full bg-[#211f1d] border border-[#ffb4a3]/20 rounded flex items-end p-1 gap-1">
+<div class="w-full h-1/2 bg-gradient-to-t from-[#ffb4a3]/30 to-transparent"></div>
+</div>
+</div>
+</div>
+<div class="px-2 pb-2 flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface text-sm">Luminous Dark</span>
+<span class="material-symbols-outlined text-primary text-opacity-0 peer-checked:text-opacity-100 transition-opacity">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Light Theme -->
+<label class="cursor-pointer group">
+<input class="peer sr-only radio-custom" name="theme" type="radio" value="light"/>
+<div class="border border-outline/30 rounded-lg p-1 transition-all duration-300 group-hover:border-primary/50 relative overflow-hidden bg-surface-container-highest opacity-70">
+<!-- Preview Graphic -->
+<div class="h-24 bg-[#f8f9fa] rounded-md mb-3 p-2 flex flex-col gap-2 relative z-10 border border-[#e9ecef]">
+<div class="h-2 w-1/3 bg-[#dee2e6] rounded"></div>
+<div class="flex-1 flex gap-2">
+<div class="w-8 h-full bg-[#dee2e6] rounded"></div>
+<div class="flex-1 h-full bg-white border border-[#ff7e5f]/20 rounded flex items-end p-1 gap-1">
+<div class="w-full h-1/2 bg-gradient-to-t from-[#ff7e5f]/20 to-transparent"></div>
+</div>
+</div>
+</div>
+<div class="px-2 pb-2 flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface text-sm">Glass Light</span>
+<span class="material-symbols-outlined text-primary text-opacity-0 peer-checked:text-opacity-100 transition-opacity">check_circle</span>
+</div>
+</div>
+</label>
+<!-- System Theme -->
+<label class="cursor-pointer group">
+<input class="peer sr-only radio-custom" name="theme" type="radio" value="system"/>
+<div class="border border-outline/30 rounded-lg p-1 transition-all duration-300 group-hover:border-primary/50 relative overflow-hidden bg-surface-container-highest opacity-70">
+<!-- Preview Graphic -->
+<div class="h-24 rounded-md mb-3 flex relative z-10 border border-outline/10">
+<div class="w-1/2 h-full bg-[#f8f9fa] rounded-l-md"></div>
+<div class="w-1/2 h-full bg-[#151311] rounded-r-md"></div>
+</div>
+<div class="px-2 pb-2 flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface text-sm">System Sync</span>
+<span class="material-symbols-outlined text-primary text-opacity-0 peer-checked:text-opacity-100 transition-opacity">check_circle</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Accent Color (Spans 4 cols) -->
+<section class="lg:col-span-4 glass-card-pro rounded-xl p-6 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">format_color_fill</span>
+                    Accent Color
+                </h3>
+<p class="text-sm text-on-surface-variant mb-6 flex-1">Select the primary glowing hue for interactive elements and highlights.</p>
+<div class="flex flex-wrap gap-4 justify-between mt-auto">
+<button aria-label="Coral Glow" class="w-10 h-10 rounded-full bg-[#ffb4a3] color-swatch active shadow-[0_0_15px_rgba(255,180,163,0.4)]"></button>
+<button aria-label="Mint Green" class="w-10 h-10 rounded-full bg-[#82ca9d] color-swatch opacity-60 hover:opacity-100 transition-opacity"></button>
+<button aria-label="Neon Violet" class="w-10 h-10 rounded-full bg-[#8884d8] color-swatch opacity-60 hover:opacity-100 transition-opacity"></button>
+<button aria-label="Amber Flare" class="w-10 h-10 rounded-full bg-[#ffc658] color-swatch opacity-60 hover:opacity-100 transition-opacity"></button>
+<button aria-label="Muted Silver" class="w-10 h-10 rounded-full bg-[#a4b0be] color-swatch opacity-60 hover:opacity-100 transition-opacity"></button>
+</div>
+</section>
+<!-- Typography & Sizing (Spans 6 cols) -->
+<section class="lg:col-span-6 glass-card-pro rounded-xl p-6">
+<h3 class="font-title-md text-title-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">text_fields</span>
+                    Interface Scaling
+                </h3>
+<div class="mb-8">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm text-on-surface-variant font-label-caps text-label-caps">Font Size</span>
+<span class="font-data-sm text-data-sm text-primary">100%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-body-md text-xs text-on-surface-variant">A</span>
+<input class="w-full appearance-none bg-transparent" max="120" min="80" type="range" value="100"/>
+<span class="font-body-md text-xl text-on-surface-variant">A</span>
+</div>
+</div>
+<div>
+<h4 class="text-sm text-on-surface-variant font-label-caps text-label-caps mb-3">Data Ticker Font</h4>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary bg-surface-container border-outline/30" name="font" type="radio" value="ubuntu"/>
+<span class="font-data-sm text-data-sm text-on-surface">Ubuntu Mono (Default)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary bg-surface-container border-outline/30" name="font" type="radio" value="inter"/>
+<span class="font-body-md text-sm text-on-surface">Montserrat Data</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Layout & Charts (Spans 6 cols) -->
+<section class="lg:col-span-6 glass-card-pro rounded-xl p-6">
+<h3 class="font-title-md text-title-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+                    Dashboard Layout
+                </h3>
+<div class="space-y-6">
+<!-- Standard vs Compact -->
+<div class="flex justify-between items-center p-3 rounded-lg bg-surface-container/50 border border-outline/10 hover:border-primary/30 transition-colors">
+<div>
+<h4 class="font-title-md text-on-surface text-base">Compact Mode</h4>
+<p class="text-xs text-on-surface-variant mt-1">Reduce spacing to fit more data</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary/80"></div>
+</label>
+</div>
+<!-- Chart Style Default -->
+<div>
+<h4 class="text-sm text-on-surface-variant font-label-caps text-label-caps mb-3">Default Chart Style</h4>
+<div class="grid grid-cols-2 gap-3">
+<label class="cursor-pointer group">
+<input checked="" class="peer sr-only radio-custom" name="chart" type="radio" value="candle"/>
+<div class="border border-outline/30 rounded-lg p-3 text-center transition-all duration-300 group-hover:bg-white/5 bg-surface-container-highest flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary">candlestick_chart</span>
+<span class="text-sm text-on-surface">Candlestick</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer sr-only radio-custom" name="chart" type="radio" value="line"/>
+<div class="border border-outline/30 rounded-lg p-3 text-center transition-all duration-300 group-hover:bg-white/5 bg-surface-container-highest flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">show_chart</span>
+<span class="text-sm text-on-surface">Line Area</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Mobile Action Bar (Sticky Bottom) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full p-4 glass-card z-50 border-t border-white/10">
+<button class="w-full py-3 rounded-lg btn-primary text-on-primary font-title-md text-title-md">Save Appearance</button>
+</div>
+<!-- Spacer for mobile action bar -->
+<div class="h-20 md:hidden"></div>
+</main>
+<script>
+        // Simple script for color swatch selection visual feedback
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                document.querySelectorAll('.color-swatch').forEach(s => {
+                    s.classList.remove('active');
+                    s.classList.add('opacity-60');
+                    s.style.boxShadow = 'none';
+                });
+                this.classList.add('active');
+                this.classList.remove('opacity-60');
+                // Extremely basic shadow application based on bg color for demo
+                const bgColor = window.getComputedStyle(this).backgroundColor;
+                this.style.boxShadow = `0 0 15px ${bgColor.replace('rgb', 'rgba').replace(')', ', 0.4)')}`;
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Security Settings - Orion Trading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad2",
+                        "surface-container-high": "#2c2a27",
+                        "outline": "#a68b84",
+                        "on-primary-fixed-variant": "#84240d",
+                        "secondary-container": "#6f3c0d",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#373432",
+                        "secondary": "#ffb780",
+                        "on-background": "#e7e1de",
+                        "on-tertiary-container": "#3d393a",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "inverse-surface": "#e7e1de",
+                        "tertiary-fixed": "#e9e1e2",
+                        "surface-dim": "#151311",
+                        "on-tertiary-fixed-variant": "#4a4647",
+                        "on-surface": "#e7e1de",
+                        "surface": "#151311",
+                        "inverse-primary": "#a53b22",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#332f30",
+                        "surface-container": "#211f1d",
+                        "primary": "#ffb4a3",
+                        "primary-container": "#ff7e5f",
+                        "on-primary": "#621000",
+                        "surface-container-lowest": "#0f0e0c",
+                        "on-secondary-fixed": "#2f1400",
+                        "background": "#151311",
+                        "surface-bright": "#3b3936",
+                        "surface-container-low": "#1d1b19",
+                        "tertiary": "#ccc5c6",
+                        "on-secondary-fixed-variant": "#6c3a0a",
+                        "surface-tint": "#ffb4a3",
+                        "tertiary-container": "#a9a2a3",
+                        "on-secondary": "#4e2600",
+                        "secondary-fixed": "#ffdcc4",
+                        "on-surface-variant": "#dec0b9",
+                        "secondary-fixed-dim": "#ffb780",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#1e1b1c",
+                        "on-secondary-container": "#f1a971",
+                        "surface-variant": "#373432",
+                        "on-primary-fixed": "#3d0700",
+                        "inverse-on-surface": "#32302e",
+                        "outline-variant": "#57423d",
+                        "on-primary-container": "#721702",
+                        "tertiary-fixed-dim": "#ccc5c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Merriweather"],
+                        "headline-lg": ["Merriweather"],
+                        "data-lg": ["Ubuntu Mono"],
+                        "body-md": ["Montserrat"],
+                        "data-sm": ["Ubuntu Mono"],
+                        "title-md": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "display-lg": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "data-lg": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "data-sm": ["14px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--tw-colors-primary), var(--tw-colors-secondary));
+            color: var(--tw-colors-on-primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px var(--tw-colors-primary);
+            filter: brightness(1.1);
+        }
+        .bg-blur-gradient {
+            background: radial-gradient(circle at 50% -20%, rgba(255, 126, 95, 0.15) 0%, rgba(21, 19, 17, 1) 70%);
+        }
+        
+        /* Custom Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #ffb4a3;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #ffb4a3;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+        .toggle-label {
+            width: 3rem;
+            height: 1.5rem;
+            background-color: #57423d;
+            border-radius: 9999px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-label:after {
+            content: '';
+            position: absolute;
+            top: 0.125rem;
+            left: 0.125rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen bg-blur-gradient flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-between items-center px-margin-mobile h-16 bg-surface/60 backdrop-blur-xl border-b border-white/10 w-full fixed top-0 z-40">
+<div class="font-headline-lg-mobile text-primary tracking-tight">Lumina Trade</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined cursor-pointer" data-icon="menu">menu</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col pt-20 pb-10 px-4 w-64 z-30 bg-surface-container/80 backdrop-blur-2xl border-r border-white/10 shadow-2xl fixed left-0 top-0 h-full">
+<div class="mb-10 px-4 flex items-center gap-4">
+<img alt="Trading Portfolio Avatar" class="w-12 h-12 rounded-full border border-primary/30 object-cover" data-alt="A futuristic, luminescent user avatar portraying a highly professional trader in a sleek, glassmorphic environment. The lighting is warm and cinematic, emphasizing sophisticated details. Deep charcoal background with subtle coral and peach light accents. High-end fintech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASgcTOCpTwpByTpd8DjvHR9TfszxhotWXMl7ar_oFS7BZRGlYfICK8oKSICWdtrHVFsHYMkQTjj6H0Awl5o4RTmuKkmTXtCcsSc9y9nyjKJSypak_8vUZYHn3DrNIlfas4y5z-zPCVoC3c2bWShoi0mBTeXbS23a7S7_Ou4RPafuAOJPYvDbL2LcWDfblPOL4Y_7SvsGBaxGGJj5gNpdjckxRYbRV3HNp6A6uTcqZze_pL0AXbPw_TtA">
+<div>
+<h2 class="font-title-md text-secondary">Pro Trader</h2>
+<p class="font-label-caps text-on-surface-variant/70 text-[10px]">Verified Account</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Active Tab: Security -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-primary/20 to-transparent text-primary border-l-4 border-primary font-bold active:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="security" data-weight="fill" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-title-md text-sm">Security</span>
+</a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 active:translate-x-1 hover:backdrop-brightness-125 transition-all duration-300 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-title-md text-sm">Strategies</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 active:translate-x-1 hover:backdrop-brightness-125 transition-all duration-300 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined" data-icon="vpn_key">vpn_key</span>
+<span class="font-title-md text-sm">API Keys</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 active:translate-x-1 hover:backdrop-brightness-125 transition-all duration-300 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="font-title-md text-sm">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 active:translate-x-1 hover:backdrop-brightness-125 transition-all duration-300 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="font-title-md text-sm">Appearance</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full py-3 rounded-lg font-label-caps uppercase btn-primary shadow-lg shadow-primary/20">Upgrade to VIP</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 w-full md:pl-64 pt-20 md:pt-10 px-margin-mobile md:px-margin-desktop pb-20 overflow-y-auto">
+<header class="mb-10">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-on-surface">Security Settings</h1>
+<p class="text-on-surface-variant mt-2 font-body-md text-sm">Manage your account security, authentication methods, and active sessions.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Core Security -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- 2FA Card -->
+<section class="glass-panel rounded-xl p-6 md:p-8">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h2 class="font-title-md text-secondary text-xl">Two-Factor Authentication (2FA)</h2>
+</div>
+<p class="text-on-surface-variant text-sm max-w-xl">Add an extra layer of security to your account. We highly recommend keeping 2FA enabled to protect your assets.</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in mt-1">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer opacity-0 z-10" id="tfa-toggle" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" for="tfa-toggle"></label>
+</div>
+<span class="text-primary mt-2 font-label-caps text-[10px] tracking-wider uppercase drop-shadow-[0_0_8px_rgba(255,180,163,0.6)]">Enabled</span>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg border border-white/5 flex items-center justify-between group hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="smartphone">smartphone</span>
+<div>
+<h3 class="font-title-md text-sm">Authenticator App</h3>
+<p class="text-on-surface-variant text-xs">Google Auth, Authy</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-white/5 flex items-center justify-between group hover:border-primary/30 transition-colors cursor-pointer opacity-60 hover:opacity-100">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="sms">sms</span>
+<div>
+<h3 class="font-title-md text-sm">SMS Authentication</h3>
+<p class="text-on-surface-variant text-xs">Setup text alerts</p>
+</div>
+</div>
+<button class="font-label-caps text-secondary text-[10px] uppercase border border-secondary/50 px-2 py-1 rounded">Setup</button>
+</div>
+</div>
+</section>
+<!-- Password Management -->
+<section class="glass-panel rounded-xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="password">password</span>
+<h2 class="font-title-md text-secondary text-xl">Password Management</h2>
+</div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface-container/50 p-4 rounded-lg border border-white/5">
+<div>
+<p class="text-on-surface font-title-md text-sm">Login Password</p>
+<p class="text-on-surface-variant text-xs mt-1">Last changed: <span class="font-data-sm text-secondary/80">32 days ago</span></p>
+</div>
+<button class="px-6 py-2 rounded-lg font-label-caps uppercase border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">Change Password</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Activity & Sessions -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Active Sessions -->
+<section class="glass-panel rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error" data-icon="devices">devices</span>
+<h2 class="font-title-md text-on-surface">Active Sessions</h2>
+</div>
+<button class="text-error hover:text-error-container font-label-caps text-[10px] uppercase transition-colors">Log Out All</button>
+</div>
+<div class="space-y-4">
+<!-- Current Session -->
+<div class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-highest border border-primary/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1 h-full bg-primary drop-shadow-[0_0_5px_rgba(255,180,163,0.8)]"></div>
+<span class="material-symbols-outlined text-primary mt-1" data-icon="computer">computer</span>
+<div>
+<h3 class="font-title-md text-sm text-primary">MacBook Pro - Chrome</h3>
+<p class="font-data-sm text-xs text-on-surface-variant mt-1">192.168.1.1</p>
+<p class="text-xs text-on-surface-variant mt-0.5">London, UK • <span class="text-secondary">Current Session</span></p>
+</div>
+</div>
+<!-- Other Session -->
+<div class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low border border-white/5 group hover:border-white/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mt-1 group-hover:text-secondary transition-colors" data-icon="smartphone">smartphone</span>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-md text-sm text-on-surface">iPhone 13 - App</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<p class="font-data-sm text-xs text-on-surface-variant mt-1">10.0.0.45</p>
+<p class="text-xs text-on-surface-variant mt-0.5">London, UK • Active 2h ago</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity List -->
+<section class="glass-panel rounded-xl p-6 flex-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="history">history</span>
+<h2 class="font-title-md text-on-surface">Recent Login Activity</h2>
+</div>
+<div class="space-y-0 relative before:absolute before:inset-y-0 before:left-[11px] before:w-px before:bg-white/10">
+<!-- Activity Item 1 -->
+<div class="relative pl-8 py-3">
+<div class="absolute left-0 top-4 w-6 h-6 rounded-full bg-surface border-2 border-primary/50 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-primary drop-shadow-[0_0_3px_rgba(255,180,163,0.8)]"></div>
+</div>
+<h3 class="font-title-md text-sm text-on-surface">Successful Login</h3>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-on-surface-variant">MacBook Pro • London, UK</p>
+<p class="font-data-sm text-xs text-secondary/70">Just now</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="relative pl-8 py-3">
+<div class="absolute left-0 top-4 w-6 h-6 rounded-full bg-surface border-2 border-white/20 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-secondary/50"></div>
+</div>
+<h3 class="font-title-md text-sm text-on-surface-variant">Successful Login</h3>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-on-surface-variant/70">iPhone 13 • London, UK</p>
+<p class="font-data-sm text-xs text-on-surface-variant/50">Yesterday</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="relative pl-8 py-3">
+<div class="absolute left-0 top-4 w-6 h-6 rounded-full bg-surface border-2 border-error/50 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_3px_rgba(255,180,171,0.8)]"></div>
+</div>
+<h3 class="font-title-md text-sm text-error">Failed Attempt</h3>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-on-surface-variant/70 font-data-sm">IP: 192.168.1.99</p>
+<p class="font-data-sm text-xs text-error/70">3 days ago</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+
+
+</body></html>

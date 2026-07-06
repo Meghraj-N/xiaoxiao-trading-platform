@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Select Strategy - LUMINA TRADING</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;family=Merriweather:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#1d1b19",
+                      "on-tertiary-fixed": "#1e1b1c",
+                      "surface-bright": "#3b3936",
+                      "secondary-fixed-dim": "#ffb780",
+                      "error": "#ffb4ab",
+                      "on-background": "#e7e1de",
+                      "surface-container-lowest": "#0f0e0c",
+                      "tertiary-fixed": "#e9e1e2",
+                      "surface-variant": "#373432",
+                      "inverse-primary": "#a53b22",
+                      "error-container": "#93000a",
+                      "on-primary": "#621000",
+                      "on-secondary-container": "#f1a971",
+                      "on-secondary": "#4e2600",
+                      "outline": "#a68b84",
+                      "inverse-surface": "#e7e1de",
+                      "primary-container": "#ff7e5f",
+                      "outline-variant": "#57423d",
+                      "on-tertiary": "#332f30",
+                      "primary-fixed": "#ffdad2",
+                      "background": "#151311",
+                      "surface-container-highest": "#373432",
+                      "secondary": "#ffb780",
+                      "tertiary": "#ccc5c6",
+                      "primary": "#ffb4a3",
+                      "on-surface-variant": "#dec0b9",
+                      "on-secondary-fixed-variant": "#6c3a0a",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#32302e",
+                      "on-primary-fixed-variant": "#84240d",
+                      "surface-tint": "#ffb4a3",
+                      "surface-container-high": "#2c2a27",
+                      "on-secondary-fixed": "#2f1400",
+                      "secondary-container": "#6f3c0d",
+                      "surface-container": "#211f1d",
+                      "on-primary-fixed": "#3d0700",
+                      "on-tertiary-fixed-variant": "#4a4647",
+                      "surface": "#151311",
+                      "on-surface": "#e7e1de",
+                      "secondary-fixed": "#ffdcc4",
+                      "tertiary-container": "#a9a2a3",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#ffb4a3",
+                      "on-tertiary-container": "#3d393a",
+                      "surface-dim": "#151311",
+                      "tertiary-fixed-dim": "#ccc5c6",
+                      "on-primary-container": "#721702"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Montserrat"
+                      ],
+                      "data-sm": [
+                              "Ubuntu Mono"
+                      ],
+                      "body-md": [
+                              "Montserrat"
+                      ],
+                      "headline-lg-mobile": [
+                              "Merriweather"
+                      ],
+                      "headline-lg": [
+                              "Merriweather"
+                      ],
+                      "data-lg": [
+                              "Ubuntu Mono"
+                      ],
+                      "display-lg": [
+                              "Merriweather"
+                      ],
+                      "label-caps": [
+                              "Montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "data-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card-pro {
+            background-color: rgba(21, 19, 17, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(21, 19, 17, 0.6), rgba(21, 19, 17, 0.6)), linear-gradient(135deg, rgba(255,180,163,0.3) 0%, rgba(255,255,255,0.05) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .glow-active {
+            box-shadow: 0 0 20px rgba(255, 126, 95, 0.2);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(90deg, #ffb4a3 0%, #ffb780 100%);
+            color: #2f1400;
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 180, 163, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .sparkline-gradient {
+            stroke: url(#sparkline-grad);
+        }
+        
+        .sparkline-area {
+            fill: url(#sparkline-area-grad);
+        }
+        
+        .positive-glow {
+            text-shadow: 0 0 8px rgba(163, 255, 180, 0.5);
+            background-color: rgba(163, 255, 180, 0.1);
+        }
+        
+        .negative-glow {
+            text-shadow: 0 0 8px rgba(255, 180, 163, 0.5);
+            background-color: rgba(255, 180, 163, 0.1);
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- SVG Definitions for Sparklines -->
+<svg class="absolute" height="0" width="0">
+<defs>
+<lineargradient id="sparkline-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ffb4a3"></stop>
+<stop offset="100%" stop-color="#ffb780"></stop>
+</lineargradient>
+<lineargradient id="sparkline-area-grad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#ffb4a3" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#ffb4a3" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- TopNavBar -->
+<nav class="bg-surface/60 dark:bg-surface/60 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-[0_0_15px_rgba(255,126,95,0.1)] flex justify-between items-center px-margin-desktop h-16 w-full">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-3xl">token</span>
+<span class="font-display-lg text-title-md font-black tracking-tighter text-primary-container dark:text-primary">LUMINA TRADING</span>
+</div>
+<!-- Navigation Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-body-md font-title-md text-title-md hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95" href="#">Markets</a>
+<a class="text-on-surface-variant font-body-md font-title-md text-title-md hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95" href="#">Portfolio</a>
+<a class="text-on-surface-variant font-body-md font-title-md text-title-md hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95" href="#">History</a>
+<a class="text-on-surface-variant font-body-md font-title-md text-title-md hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95" href="#">Academy</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-white/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A sophisticated macro shot of a sleek, futuristic avatar icon etched into brushed dark metal, glowing with a soft peach and coral ambient light against a deep charcoal background, reflecting a high-end trading environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZcvd1wuUaRJPEdkDJ0rGvTEKj-WOLrz94W2vnfc-deC2z7gnDdxcBJdr5bZduK7XMN0KIwm4MfKKQCLzSpnnKBpLVK1Kixh80_CXGE7v5LYPdFfuvrQapRpQMMIlOJXtnNAOYkpuQKfsZ5Yl_tVrEKH72EoCJxJ_jbhwwV2UuEK9W80LRCbwvzt_vuO_BjO4PZb7WRhwrsa2VQ0dHE8UNgN8HNG2bKWsf4XCNQRq7dlP-vG7AsGMgqg"/>
+</div>
+</div>
+</nav>
+<!-- Main Layout -->
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-2xl fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40 border-r border-white/10 shadow-2xl flex-col py-6 gap-2">
+<!-- Sidebar Header -->
+<div class="px-6 pb-6 mb-2 border-b border-white/10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden border border-white/10">
+<img alt="Pro Trader Status" class="w-full h-full object-cover" data-alt="A luxurious golden badge emblem signifying 'Pro Trader Status' floating subtly against a deep dark background, illuminated by soft warm neon light, embodying a premium fintech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAemW1Tb0nfzqwqvYYeAkgVd598ajn-TFA3dVoKKgZXcfv0EIqRoL8zrGGL6MlBzkol9LtKImHJ9GpZYofc3HWRvpvn1BiIceMaG3TjwGWSeUc4jqS439KiXX6iWgCla4A7oq8H9RseuTljUB6ujOB3TnIKhCx_yrYJJ9t6n4X95E2yohv2LCiFkufGW39e6wxc8E2cnRu_4AkZ7nWr-9GeuV6EB4FnkSeF_z91cIqxkHzIUeDyK_7lnA"/>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Strategy Hub</h2>
+<p class="font-data-sm text-data-sm text-secondary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(255,183,128,0.8)]"></span>
+                        Live Markets
+                    </p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 px-2 space-y-1 overflow-y-auto">
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all scale-100 active:scale-98 transition-transform flex items-center gap-3 px-4 py-3" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-on-secondary-container bg-secondary-container/20 rounded-lg mx-2 border-l-4 border-secondary hover:bg-white/10 hover:text-on-surface transition-all scale-100 active:scale-98 transition-transform flex items-center gap-3 px-4 py-3" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary">query_stats</span>
+<span class="font-label-caps text-label-caps">Strategies</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all scale-100 active:scale-98 transition-transform flex items-center gap-3 px-4 py-3" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary">smart_toy</span>
+<span class="font-label-caps text-label-caps">Bots</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all scale-100 active:scale-98 transition-transform flex items-center gap-3 px-4 py-3" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all scale-100 active:scale-98 transition-transform flex items-center gap-3 px-4 py-3" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary">account_balance_wallet</span>
+<span class="font-label-caps text-label-caps">Wallet</span>
+</a>
+</nav>
+<!-- Footer Actions -->
+<div class="px-4 mt-auto space-y-2">
+<button class="w-full px-4 py-3 rounded-lg border border-primary/30 text-primary font-label-caps text-label-caps hover:bg-primary/10 transition-colors flex justify-center items-center gap-2">
+                    Upgrade to Pro
+                </button>
+<div class="pt-4 border-t border-white/10 space-y-1">
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all flex items-center gap-3 px-4 py-2" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary text-sm">help_outline</span>
+<span class="font-label-caps text-label-caps opacity-80">Support</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 mx-2 rounded-lg hover:bg-white/10 hover:text-on-surface transition-all flex items-center gap-3 px-4 py-2" href="#">
+<span class="material-symbols-outlined text-secondary-fixed-dim dark:text-secondary text-sm">logout</span>
+<span class="font-label-caps text-label-caps opacity-80">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<!-- Page Header -->
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Select Strategy</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Deploy automated trading algorithms tailored to your risk profile. Monitor performance metrics in real-time and manage your active bots.</p>
+</div>
+<!-- Filter/Sort Controls -->
+<div class="flex items-center gap-3">
+<div class="relative glass-card rounded-lg flex items-center px-3 py-2 w-full md:w-auto">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none text-on-surface font-body-md text-body-md focus:ring-0 p-0 placeholder-on-surface-variant/50 w-full md:w-48 outline-none" placeholder="Search strategies..." type="text"/>
+</div>
+<button class="glass-card p-2 rounded-lg text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</header>
+<!-- Strategy Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+<!-- Card 1: Volatility Scalper (Active) -->
+<article class="glass-card-pro rounded-xl p-6 flex flex-col gap-6 relative overflow-hidden group glow-active"><div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-[60px] pointer-events-none"></div><header class="flex justify-between items-start z-10"><div class="flex flex-col gap-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span><h3 class="font-title-md text-title-md text-on-surface">Volatility Scalper</h3></div><span class="font-data-sm text-data-sm text-on-surface-variant bg-surface-container-high/50 px-2 py-0.5 rounded w-max">High Frequency</span></div><div class="flex flex-col items-end"><span class="font-label-caps text-[10px] text-on-surface-variant mb-1 opacity-60">RISK LEVEL</span><div class="flex gap-1"><span class="w-3 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(255,180,163,0.6)]"></span><span class="w-3 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(255,180,163,0.6)]"></span><span class="w-3 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(255,180,163,0.6)]"></span></div></div></header><div class="grid grid-cols-2 gap-y-4 gap-x-2 z-10"><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">WIN RATE</span><span class="font-data-lg text-data-lg text-on-surface">78.4%</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">24H P&amp;L</span><span class="font-data-lg text-data-lg positive-glow px-2 py-0.5 rounded text-primary">+$1,245.50</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">SHARPE</span><span class="font-data-sm text-on-surface">3.24</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">MAX DD</span><span class="font-data-sm text-error">-4.2%</span></div></div><div class="h-12 w-full z-10"><svg height="100%" preserveaspectratio="none" viewbox="0 0 100 30" width="100%"><path class="sparkline-area" d="M0,30 L0,20 C15,18 25,25 40,15 C55,5 75,20 100,5 L100,30 Z"></path><path class="sparkline-gradient" d="M0,20 C15,18 25,25 40,15 C55,5 75,20 100,5" fill="none" stroke-width="1.5"></path></svg></div><footer class="mt-auto flex flex-col gap-2 z-10"><div class="flex items-center justify-between bg-surface-container-lowest/40 px-3 py-2 rounded border border-white/5"><span class="font-data-sm text-[12px] text-on-surface-variant flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]"></span>Bot Active</span><span class="font-data-sm text-[12px] text-on-surface opacity-80">48h 12m</span></div><div class="flex gap-2"><button class="flex-1 py-2 px-3 rounded bg-surface-container-high hover:bg-surface-bright border border-white/10 text-on-surface font-label-caps text-[11px] transition-all flex items-center justify-center gap-2">CONFIG</button><button class="flex-1 py-2 px-3 rounded bg-secondary-container/20 hover:bg-secondary-container/40 border border-secondary/30 text-secondary font-label-caps text-[11px] transition-all flex items-center justify-center gap-2">STOP BOT</button></div></footer></article>
+<!-- Card 2: Trend Follower -->
+<article class="glass-card rounded-xl p-6 flex flex-col gap-6 relative overflow-hidden group hover:border-primary/30 transition-colors"><header class="flex justify-between items-start z-10"><div class="flex flex-col gap-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-lg">trending_up</span><h3 class="font-title-md text-title-md text-on-surface">Trend Follower</h3></div><span class="font-data-sm text-data-sm text-on-surface-variant bg-surface-container-high/50 px-2 py-0.5 rounded w-max">Swing Trading</span></div><div class="flex flex-col items-end"><span class="font-label-caps text-[10px] text-on-surface-variant mb-1 opacity-60">RISK LEVEL</span><div class="flex gap-1"><span class="w-3 h-1 rounded-full bg-secondary"></span><span class="w-3 h-1 rounded-full bg-secondary"></span><span class="w-3 h-1 rounded-full bg-surface-variant"></span></div></div></header><div class="grid grid-cols-2 gap-y-4 gap-x-2 z-10"><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">WIN RATE</span><span class="font-data-lg text-data-lg text-on-surface">62.1%</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">24H P&amp;L</span><span class="font-data-lg text-data-lg negative-glow px-2 py-0.5 rounded text-secondary">-$142.30</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">SHARPE</span><span class="font-data-sm text-on-surface">1.85</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">MAX DD</span><span class="font-data-sm text-error">-12.4%</span></div></div><div class="h-12 w-full z-10 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"><svg height="100%" preserveaspectratio="none" viewbox="0 0 100 30" width="100%"><path class="sparkline-area" d="M0,30 L0,15 C20,25 40,5 60,20 C80,10 90,25 100,15 L100,30 Z"></path><path class="sparkline-gradient" d="M0,15 C20,25 40,5 60,20 C80,10 90,25 100,15" fill="none" stroke-width="1.5"></path></svg></div><footer class="mt-auto z-10"><button class="w-full py-2.5 px-4 rounded bg-primary text-on-primary font-label-caps text-[11px] hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(255,180,163,0.2)]">START STRATEGY</button></footer></article>
+<!-- Card 3: HFT Arbitrage -->
+<article class="glass-card rounded-xl p-6 flex flex-col gap-6 relative overflow-hidden group hover:border-primary/30 transition-colors"><header class="flex justify-between items-start z-10"><div class="flex flex-col gap-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-lg">compare_arrows</span><h3 class="font-title-md text-title-md text-on-surface">HFT Arbitrage</h3></div><span class="font-data-sm text-data-sm text-on-surface-variant bg-surface-container-high/50 px-2 py-0.5 rounded w-max">Market Neutral</span></div><div class="flex flex-col items-end"><span class="font-label-caps text-[10px] text-on-surface-variant mb-1 opacity-60">RISK LEVEL</span><div class="flex gap-1"><span class="w-3 h-1 rounded-full bg-tertiary"></span><span class="w-3 h-1 rounded-full bg-surface-variant"></span><span class="w-3 h-1 rounded-full bg-surface-variant"></span></div></div></header><div class="grid grid-cols-2 gap-y-4 gap-x-2 z-10"><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">WIN RATE</span><span class="font-data-lg text-data-lg text-on-surface">94.2%</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">24H P&amp;L</span><span class="font-data-lg text-data-lg positive-glow px-2 py-0.5 rounded text-primary">+$310.75</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">SHARPE</span><span class="font-data-sm text-on-surface">4.12</span></div><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant opacity-60">MAX DD</span><span class="font-data-sm text-error">-0.8%</span></div></div><div class="h-12 w-full z-10 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"><svg height="100%" preserveaspectratio="none" viewbox="0 0 100 30" width="100%"><path class="sparkline-area" d="M0,30 L0,25 C20,20 40,28 60,22 C80,18 90,24 100,20 L100,30 Z"></path><path class="sparkline-gradient" d="M0,25 C20,20 40,28 60,22 C80,18 90,24 100,20" fill="none" stroke-width="1.5"></path></svg></div><footer class="mt-auto z-10"><button class="w-full py-2.5 px-4 rounded bg-primary text-on-primary font-label-caps text-[11px] hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(255,180,163,0.2)]">START STRATEGY</button></footer></article>
+</div>
+</main>
+</div>
+</body></html>

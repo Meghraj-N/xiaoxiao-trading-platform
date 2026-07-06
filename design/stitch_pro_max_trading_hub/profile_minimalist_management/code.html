@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Settings - Orion Trading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;family=Ubuntu+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#ffdad6",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e7e1de",
+                      "primary": "#ffb4a3",
+                      "on-tertiary-container": "#3d393a",
+                      "on-background": "#e7e1de",
+                      "surface-bright": "#3b3936",
+                      "secondary-container": "#6f3c0d",
+                      "on-surface-variant": "#dec0b9",
+                      "on-secondary": "#4e2600",
+                      "on-tertiary-fixed": "#1e1b1c",
+                      "background": "#151311",
+                      "error-container": "#93000a",
+                      "surface": "#151311",
+                      "primary-container": "#ff7e5f",
+                      "inverse-on-surface": "#32302e",
+                      "surface-tint": "#ffb4a3",
+                      "tertiary-fixed": "#e9e1e2",
+                      "tertiary-container": "#a9a2a3",
+                      "primary-fixed-dim": "#ffb4a3",
+                      "tertiary-fixed-dim": "#ccc5c6",
+                      "on-surface": "#e7e1de",
+                      "outline-variant": "#57423d",
+                      "on-tertiary": "#332f30",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#151311",
+                      "outline": "#a68b84",
+                      "inverse-primary": "#a53b22",
+                      "surface-container-highest": "#373432",
+                      "secondary-fixed": "#ffdcc4",
+                      "secondary-fixed-dim": "#ffb780",
+                      "on-tertiary-fixed-variant": "#4a4647",
+                      "on-primary": "#621000",
+                      "on-primary-container": "#721702",
+                      "primary-fixed": "#ffdad2",
+                      "surface-container-lowest": "#0f0e0c",
+                      "secondary": "#ffb780",
+                      "on-secondary-container": "#f1a971",
+                      "surface-container-low": "#1d1b19",
+                      "tertiary": "#ccc5c6",
+                      "on-secondary-fixed-variant": "#6c3a0a",
+                      "surface-container-high": "#2c2a27",
+                      "surface-variant": "#373432",
+                      "on-secondary-fixed": "#2f1400",
+                      "on-primary-fixed-variant": "#84240d",
+                      "surface-container": "#211f1d",
+                      "on-primary-fixed": "#3d0700"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.5rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Merriweather"],
+                      "title-md": ["Montserrat"],
+                      "data-sm": ["Ubuntu Mono"],
+                      "display-lg": ["Merriweather"],
+                      "headline-lg-mobile": ["Merriweather"],
+                      "data-lg": ["Ubuntu Mono"],
+                      "label-caps": ["Montserrat"],
+                      "body-md": ["Montserrat"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-sm": ["14px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "data-lg": ["18px", {"lineHeight": "22px", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background-color: rgba(21, 19, 17, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .glass-glow {
+            box-shadow: 0 0 50px -10px rgba(255, 126, 95, 0.15);
+        }
+        .profile-card-bg {
+            background: radial-gradient(circle at top right, rgba(255, 126, 95, 0.08), transparent 70%);
+        }
+        .input-minimal {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 0;
+            transition: border-color 0.3s ease;
+        }
+        .input-minimal:focus {
+            outline: none;
+            border-bottom-color: #ff7e5f;
+            box-shadow: none;
+        }
+        .btn-coral-soft {
+            color: #ff7e5f;
+            transition: all 0.3s ease;
+        }
+        .btn-coral-soft:hover {
+            opacity: 0.8;
+            text-shadow: 0 0 8px rgba(255, 126, 95, 0.4);
+        }
+        .btn-primary-coral {
+            background: #ff7e5f;
+            color: #151311;
+            transition: all 0.3s ease;
+        }
+        .btn-primary-coral:hover {
+            box-shadow: 0 0 15px rgba(255, 126, 95, 0.3);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container-low/60 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-between items-center h-16 px-gutter border-b border-white/5">
+<div class="font-display-lg text-primary text-2xl tracking-tighter">ORION</div>
+<button class="text-on-surface-variant/80">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex bg-surface-container-low/60 backdrop-blur-2xl fixed left-0 top-0 h-screen w-64 border-r border-white/5 flex-col py-6 px-4 z-40">
+<div class="mb-10 px-2 flex flex-col items-start gap-4">
+<div class="font-display-lg tracking-tighter text-primary text-3xl">ORION</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsvULo4WcziidZ9SBsdWZA5pNGKzPJGfRuMEdbvMX4pg1DBa_ILFsE31RDRpTl3i15IfNuX1cWA817GERs7xXjLNNwYXHn9rHWcZtKZYYufLuoWQ2YN4dQx9gEb-Lr2kPSFufL_Jhy4-AgPT-oSFFzrDNhN3tZoj_XfVBY0eQ4k-aGsJdkxplipDhAbCcaFnuHonbm_70IjVy99d4Hs41pKW9qFJOavpUvWdPSJswPEiaBnm2AlJ1iwA"/>
+</div>
+<div>
+<div class="font-title-md text-on-surface text-sm">Pro Trader</div>
+<div class="font-data-sm text-primary opacity-80 text-xs">Elite Tier</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span> Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span> AI Agent
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">storefront</span> Market Mall
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-white/5 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/20 text-primary border-l-4 border-primary font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">settings</span> Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary/10 transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span> Support
+            </a>
+<button class="mt-4 w-full py-3 rounded-DEFAULT btn-primary-coral font-label-caps text-label-caps">
+                OPEN TRADE
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 pt-24 md:pt-16 px-margin-mobile md:px-margin-desktop pb-24 max-w-4xl mx-auto w-full min-h-screen flex flex-col gap-12 relative z-10">
+<header class="flex flex-col items-center text-center gap-4">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">Your Profile</h1>
+<p class="text-on-surface-variant max-w-md opacity-80">Manage your digital identity and professional information within the Orion ecosystem.</p>
+</header>
+<!-- Profile Card -->
+<div class="glass-panel glass-glow profile-card-bg rounded-2xl overflow-hidden flex flex-col p-8 md:p-12 relative">
+<div class="flex flex-col items-center gap-10">
+<!-- Avatar Section -->
+<div class="relative group">
+<div class="w-32 h-32 rounded-full border-2 border-primary/20 p-1 bg-surface-container-low transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_20px_rgba(255,126,95,0.2)]">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsE4TdlyLcw5ZIBoBkEZ5qcvqdTKw7bPaHPvPW5Up8b_txoQDQhI6wkjyCVzz3ZiNETZ6Pb-zso0WPVyBND_2OJU9eAq9_YPYhF0SKX5xWxUb4BC2kxf9PtlhGKCUWBqJhlrDXojw7J0h0ZEvWoz9DrABAEv0-ctlmwf4GvcIzUutdXUBKhtsIYcCRPWfife45z-Cbvhpj-ozrJv_J6VV7-EQ_yq3kNvyIyNk4BD_rgLE08WOCK6QGIQ"/>
+</div>
+</div>
+<button class="absolute bottom-1 right-1 w-10 h-10 bg-surface-container-high border border-white/10 rounded-full flex items-center justify-center text-primary shadow-lg hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+<!-- Info Form -->
+<div class="w-full max-w-xl flex flex-col gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+<!-- Full Name -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-primary/60 text-[10px]">Full Name</label>
+<button class="btn-coral-soft font-label-caps text-[10px] tracking-widest">EDIT</button>
+</div>
+<input class="input-minimal font-title-md text-on-surface" type="text" value="Pro Trader"/>
+</div>
+<!-- Email -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-primary/60 text-[10px]">Email Address</label>
+<button class="btn-coral-soft font-label-caps text-[10px] tracking-widest">EDIT</button>
+</div>
+<input class="input-minimal font-title-md text-on-surface/60" disabled="" type="email" value="pro.trader@orion.com"/>
+</div>
+</div>
+<!-- Professional Bio -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-primary/60 text-[10px]">Professional Bio</label>
+<button class="btn-coral-soft font-label-caps text-[10px] tracking-widest">EDIT</button>
+</div>
+<textarea class="input-minimal font-body-md text-on-surface/80 resize-none h-24 leading-relaxed" placeholder="Tell us about your trading journey...">Elite Tier quantitative trader focused on high-frequency arbitrage and algorithmic market making across major digital asset exchanges. 12+ years of institutional experience.</textarea>
+</div>
+</div>
+<div class="w-full max-w-xl flex justify-center pt-4">
+<button class="btn-primary-coral px-10 py-3 rounded-lg font-label-caps text-label-caps text-sm tracking-widest">
+                        SAVE PROFILE
+                    </button>
+</div>
+</div>
+<!-- Subtle Decorative Element -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-50"></div>
+</div>
+<!-- Footer Note -->
+<footer class="flex flex-col items-center gap-2 opacity-40">
+<div class="flex items-center gap-2 text-xs font-label-caps tracking-widest">
+<span class="material-symbols-outlined text-[14px]">lock</span> SECURE ENCRYPTED PROFILE
+            </div>
+<p class="text-[10px] uppercase tracking-[0.2em]">Last updated: Oct 12, 2023</p>
+</footer>
+</main>
+</body></html>

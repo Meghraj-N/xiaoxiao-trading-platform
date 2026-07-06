@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>xiaoxiao — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>xiaoxiao — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"xiaoxiao","total_count":315,"children":[{"name":"__init__.py","total_count":1,"children":[{"name":"Xiaoxiao API package.","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[{"name":"Xiaoxiao Trading Engine \u2014 Package Init","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[{"name":"Strategies sub-package.","total_count":1,"children":[]}]},{"name":"ai_engine.py","total_count":24,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._chat()","total_count":1,"children":[]},{"name":"._chat_json()","total_count":1,"children":[]},{"name":"._resolve_model()","total_count":1,"children":[]},{"name":".analyze_market()","total_count":1,"children":[]},{"name":".available()","total_count":1,"children":[]},{"name":".explain_trade()","total_count":1,"children":[]},{"name":".generate_strategy_code()","total_count":1,"children":[]},{"name":".get_models()","total_count":1,"children":[]},{"name":".improve_strategy()","total_count":1,"children":[]},{"name":".suggest_strategy()","total_count":1,"children":[]},{"name":"AI analyzes current market conditions for a trading symbol.         Returns regi","total_count":1,"children":[]},{"name":"AI explains why a specific trade won or lost.","total_count":1,"children":[]},{"name":"AI generates Python strategy code from natural language.         Returns complet","total_count":1,"children":[]},{"name":"AI reviews backtest results and suggests improvements.","total_count":1,"children":[]},{"name":"AI suggests a new strategy based on market conditions.         Returns strategy","total_count":1,"children":[]},{"name":"AI-powered analysis and strategy generation via NVIDIA NIM.     All methods retu","total_count":1,"children":[]},{"name":"AIEngine","total_count":1,"children":[]},{"name":"Chat and parse response as JSON.","total_count":1,"children":[]},{"name":"Free-form chat with AI about trading.         Returns raw text response (not JSO","total_count":1,"children":[]},{"name":"NVIDIA NIM AI Engine \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Uses OpenAI-compatible SDK to connect","total_count":1,"children":[]},{"name":"Resolve model shorthand to full NVIDIA model ID.","total_count":1,"children":[]},{"name":"Return list of available models.","total_count":1,"children":[]},{"name":"Send a chat completion request to NVIDIA NIM.","total_count":1,"children":[]}]},{"name":"AILab.jsx","total_count":2,"children":[{"name":"AILab()","total_count":1,"children":[]},{"name":"MODELS","total_count":1,"children":[]}]},{"name":"api","total_count":1,"children":[{"name":"FastAPI Server","total_count":1,"children":[]}]},{"name":"App.jsx","total_count":2,"children":[{"name":"App()","total_count":1,"children":[]},{"name":"PAGES","total_count":1,"children":[]}]},{"name":"BacktestCard.jsx","total_count":1,"children":[{"name":"BacktestCard()","total_count":1,"children":[]}]},{"name":"backtester.py","total_count":11,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._calculate_metrics()","total_count":1,"children":[]},{"name":"._simulate_trades()","total_count":1,"children":[]},{"name":".run_backtest()","total_count":1,"children":[]},{"name":"Backtester","total_count":1,"children":[]},{"name":"BacktestResult","total_count":1,"children":[]},{"name":"BacktestTrade","total_count":1,"children":[]},{"name":"Calculate performance metrics from trade list.","total_count":1,"children":[]},{"name":"Run walk-forward backtest.         HONESTY: Every trade has real fees and slippa","total_count":1,"children":[]},{"name":"Simulate trades bar-by-bar with real fees and slippage.","total_count":1,"children":[]},{"name":"Walk-Forward Backtester \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Tests strategies on historical d","total_count":1,"children":[]}]},{"name":"base.py","total_count":17,"children":[{"name":".__repr__()","total_count":1,"children":[]},{"name":".__repr__()","total_count":1,"children":[]},{"name":".calculate_indicators()","total_count":1,"children":[]},{"name":".generate_signal()","total_count":1,"children":[]},{"name":".is_trade()","total_count":1,"children":[]},{"name":".is_valid_signal()","total_count":1,"children":[]},{"name":".name()","total_count":1,"children":[]},{"name":"A trading signal produced by a strategy.      Attributes:         direction:  'l","total_count":1,"children":[]},{"name":"Abstract base for all trading strategies.      Subclasses must implement:     -","total_count":1,"children":[]},{"name":"Add technical indicators to the DataFrame.          Override this in subclasses.","total_count":1,"children":[]},{"name":"Analyze the DataFrame and produce a trading signal.          Args:             d","total_count":1,"children":[]},{"name":"BaseStrategy","total_count":1,"children":[]},{"name":"Filter out duplicate or conflicting signals.          Rules:         1. Don't op","total_count":1,"children":[]},{"name":"Returns True if this signal calls for entering a position.","total_count":1,"children":[]},{"name":"Signal","total_count":1,"children":[]},{"name":"Unique identifier for this strategy.","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot \u2014 Abstract Strategy Base  Every strategy must inherit from","total_count":1,"children":[]}]},{"name":"boll_break.py","total_count":5,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".calculate_indicators()","total_count":1,"children":[]},{"name":".generate_signal()","total_count":1,"children":[]},{"name":"Bollinger Band Breakout Strategy \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Price closes","total_count":1,"children":[]},{"name":"BollingerBreakoutStrategy","total_count":1,"children":[]}]},{"name":"config.py","total_count":1,"children":[{"name":"Xiaoxiao Trading Bot \u2014 Central Configuration  All tunable parameters live here.","total_count":1,"children":[]}]},{"name":"dashboard.html","total_count":1,"children":[{"name":"Dashboard UI","total_count":1,"children":[]}]},{"name":"data_feed.py","total_count":23,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._with_retry()","total_count":1,"children":[]},{"name":".close()","total_count":1,"children":[]},{"name":".exchange()","total_count":1,"children":[]},{"name":".fetch_current_prices()","total_count":1,"children":[]},{"name":".fetch_ohlcv()","total_count":1,"children":[]},{"name":".fetch_order_book()","total_count":1,"children":[]},{"name":".fetch_ticker()","total_count":1,"children":[]},{"name":".initialize()","total_count":1,"children":[]},{"name":".start_price_stream()","total_count":1,"children":[]},{"name":".stop_price_stream()","total_count":1,"children":[]},{"name":"Async price data provider backed by Delta Exchange through CCXT.      All method","total_count":1,"children":[]},{"name":"Clean up the exchange connection.","total_count":1,"children":[]},{"name":"Create the CCXT exchange instance and load markets.","total_count":1,"children":[]},{"name":"DataFeed","total_count":1,"children":[]},{"name":"Execute an async operation with retries and exponential backoff.         `coro_f","total_count":1,"children":[]},{"name":"Fetch current ticker data (last price, bid, ask, volume).          The returned","total_count":1,"children":[]},{"name":"Fetch historical OHLCV candles.          Returns list of [timestamp, open, high,","total_count":1,"children":[]},{"name":"Fetch last prices for multiple symbols concurrently.          Returns {symbol: p","total_count":1,"children":[]},{"name":"Fetch the order book for slippage estimation.          Returns {'bids': [[price,","total_count":1,"children":[]},{"name":"Start polling prices every `interval` seconds.          This is simpler and more","total_count":1,"children":[]},{"name":"Stop the price polling loop.","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot \u2014 Live Data Feed  Connects to Delta Exchange via CCXT for p","total_count":1,"children":[]}]},{"name":"db","total_count":1,"children":[{"name":"SQLite Storage","total_count":1,"children":[]}]},{"name":"ema_cross.py","total_count":5,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".calculate_indicators()","total_count":1,"children":[]},{"name":".generate_signal()","total_count":1,"children":[]},{"name":"EMA Crossover Strategy \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Fast EMA(9) crossing Slow EMA(21).","total_count":1,"children":[]},{"name":"EMACrossStrategy","total_count":1,"children":[]}]},{"name":"engine","total_count":1,"children":[{"name":"Trading Engine","total_count":1,"children":[]}]},{"name":"EquityCurve.jsx","total_count":1,"children":[{"name":"EquityCurve()","total_count":1,"children":[]}]},{"name":"formatters.js","total_count":6,"children":[{"name":"formatCompact()","total_count":1,"children":[]},{"name":"formatCurrency()","total_count":1,"children":[]},{"name":"formatDate()","total_count":1,"children":[]},{"name":"formatPercent()","total_count":1,"children":[]},{"name":"formatPnl()","total_count":1,"children":[]},{"name":"shortenSymbol()","total_count":1,"children":[]}]},{"name":"Layout.jsx","total_count":2,"children":[{"name":"Layout()","total_count":1,"children":[]},{"name":"NAV_ITEMS","total_count":1,"children":[]}]},{"name":"main.jsx","total_count":1,"children":[{"name":"Frontend Dashboard","total_count":1,"children":[]}]},{"name":"main.py","total_count":15,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".get_equity_curve()","total_count":1,"children":[]},{"name":".get_trades()","total_count":1,"children":[]},{"name":".init_db()","total_count":1,"children":[]},{"name":".save_equity_snapshot()","total_count":1,"children":[]},{"name":".save_trade()","total_count":1,"children":[]},{"name":"Convert CCXT OHLCV list-of-lists to a DataFrame that strategies expect.","total_count":1,"children":[]},{"name":"Database","total_count":1,"children":[]},{"name":"Initialize everything and start.","total_count":1,"children":[]},{"name":"Main trading loop.     - Every 5 seconds: fetch prices, check stops, broadcast u","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"ohlcv_to_dataframe()","total_count":1,"children":[]},{"name":"Thin wrapper so API server has a consistent interface.","total_count":1,"children":[]},{"name":"trading_loop()","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot \u2014 Main Entry Point \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500","total_count":1,"children":[]}]},{"name":"models.py","total_count":35,"children":[{"name":"A completed (closed) trade with all cost accounting baked in.","total_count":1,"children":[]},{"name":"Aggregate performance metrics for one strategy.","total_count":1,"children":[]},{"name":"Create tables if they don't exist.  Safe to call multiple times.","total_count":1,"children":[]},{"name":"Delete a custom strategy by name.","total_count":1,"children":[]},{"name":"delete_custom_strategy()","total_count":1,"children":[]},{"name":"EquitySnapshot","total_count":1,"children":[]},{"name":"Fetch trade history with optional filters.","total_count":1,"children":[]},{"name":"Get all custom strategies.","total_count":1,"children":[]},{"name":"Get all strategy stats.","total_count":1,"children":[]},{"name":"Get all trades from today (UTC).  Used by risk manager for daily loss calc.","total_count":1,"children":[]},{"name":"Get backtest results, optionally filtered by strategy name.","total_count":1,"children":[]},{"name":"Get equity snapshots, optionally filtered by timestamp.","total_count":1,"children":[]},{"name":"get_backtest_results()","total_count":1,"children":[]},{"name":"get_custom_strategies()","total_count":1,"children":[]},{"name":"get_equity_curve()","total_count":1,"children":[]},{"name":"get_strategy_stats()","total_count":1,"children":[]},{"name":"get_todays_trades()","total_count":1,"children":[]},{"name":"get_trades()","total_count":1,"children":[]},{"name":"init_db()","total_count":1,"children":[]},{"name":"Insert a completed trade.  Returns the row id.","total_count":1,"children":[]},{"name":"Insert or update a custom strategy.","total_count":1,"children":[]},{"name":"Point-in-time equity reading.","total_count":1,"children":[]},{"name":"Record an equity data point.","total_count":1,"children":[]},{"name":"Save a backtest result.","total_count":1,"children":[]},{"name":"save_backtest_result()","total_count":1,"children":[]},{"name":"save_custom_strategy()","total_count":1,"children":[]},{"name":"save_equity_snapshot()","total_count":1,"children":[]},{"name":"save_strategy_stats()","total_count":1,"children":[]},{"name":"save_trade()","total_count":1,"children":[]},{"name":"StrategyStats","total_count":1,"children":[]},{"name":"TradeRecord","total_count":1,"children":[]},{"name":"Update whether a strategy passed backtest.","total_count":1,"children":[]},{"name":"update_strategy_backtest_status()","total_count":1,"children":[]},{"name":"Upsert strategy statistics.","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot \u2014 Database Models & Access Layer  Uses aiosqlite for async","total_count":1,"children":[]}]},{"name":"package.json","total_count":17,"children":[{"name":"@vitejs/plugin-react","total_count":1,"children":[]},{"name":"build","total_count":1,"children":[]},{"name":"dependencies","total_count":1,"children":[]},{"name":"dev","total_count":1,"children":[]},{"name":"devDependencies","total_count":1,"children":[]},{"name":"lightweight-charts","total_count":1,"children":[]},{"name":"motion","total_count":1,"children":[]},{"name":"name","total_count":1,"children":[]},{"name":"preview","total_count":1,"children":[]},{"name":"private","total_count":1,"children":[]},{"name":"react","total_count":1,"children":[]},{"name":"react-dom","total_count":1,"children":[]},{"name":"recharts","total_count":1,"children":[]},{"name":"scripts","total_count":1,"children":[]},{"name":"type","total_count":1,"children":[]},{"name":"version","total_count":1,"children":[]},{"name":"vite","total_count":1,"children":[]}]},{"name":"paper_trader.py","total_count":23,"children":[{"name":"+1 for long, -1 for short.","total_count":1,"children":[]},{"name":".__init__()","total_count":1,"children":[]},{"name":".check_stops()","total_count":1,"children":[]},{"name":".close_position()","total_count":1,"children":[]},{"name":".direction()","total_count":1,"children":[]},{"name":".get_equity()","total_count":1,"children":[]},{"name":".get_status()","total_count":1,"children":[]},{"name":".get_total_pnl()","total_count":1,"children":[]},{"name":".open_position()","total_count":1,"children":[]},{"name":".to_dict()","total_count":1,"children":[]},{"name":".unrealized_pnl()","total_count":1,"children":[]},{"name":"An open futures position with all cost details.","total_count":1,"children":[]},{"name":"Calculate unrealized PnL at a given market price.         Does NOT include exit","total_count":1,"children":[]},{"name":"Check all open positions for stop-loss and take-profit hits.          HONESTY: l","total_count":1,"children":[]},{"name":"Close an open position at the given price.          Applies slippage (unfavorabl","total_count":1,"children":[]},{"name":"Open a new paper position.          Applies slippage and fees BEFORE checking ba","total_count":1,"children":[]},{"name":"PaperTrader","total_count":1,"children":[]},{"name":"Position","total_count":1,"children":[]},{"name":"Simulates futures trading with honest cost accounting.      Key invariants:","total_count":1,"children":[]},{"name":"Snapshot of the trader's state for the API.","total_count":1,"children":[]},{"name":"Total equity = cash balance + unrealized PnL of all open positions.          If","total_count":1,"children":[]},{"name":"Total realized PnL since start.","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot \u2014 Paper Trading Engine  HONESTY IS THE #1 RULE. - Every tra","total_count":1,"children":[]}]},{"name":"position_sizer.py","total_count":8,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".calculate_kelly()","total_count":1,"children":[]},{"name":".calculate_position_size()","total_count":1,"children":[]},{"name":"Calculate position size based on Kelly criterion or default risk.","total_count":1,"children":[]},{"name":"Fractional Kelly Criterion Position Sizer \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500","total_count":1,"children":[]},{"name":"Full Kelly: f* = W - (1-W)/R         Returns the raw Kelly fraction (can be nega","total_count":1,"children":[]},{"name":"PositionSizer","total_count":1,"children":[]},{"name":"SizeResult","total_count":1,"children":[]}]},{"name":"PriceChart.jsx","total_count":1,"children":[{"name":"PriceChart()","total_count":1,"children":[]}]},{"name":"README.md","total_count":6,"children":[{"name":"Bollinger Breakout Strategy","total_count":1,"children":[]},{"name":"Delta Exchange","total_count":1,"children":[]},{"name":"EMA Crossover Strategy","total_count":1,"children":[]},{"name":"Fractional Kelly Criterion","total_count":1,"children":[]},{"name":"RSI Mean Reversion Strategy","total_count":1,"children":[]},{"name":"Xiaoxiao Trading Bot","total_count":1,"children":[]}]},{"name":"requirements.txt","total_count":2,"children":[{"name":"CCXT Library","total_count":1,"children":[]},{"name":"FastAPI Framework","total_count":1,"children":[]}]},{"name":"reset_loop.py","total_count":14,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._evaluate_reset()","total_count":1,"children":[]},{"name":"._get_state()","total_count":1,"children":[]},{"name":".check_for_reset()","total_count":1,"children":[]},{"name":".get_status()","total_count":1,"children":[]},{"name":".is_strategy_disabled()","total_count":1,"children":[]},{"name":".record_trade()","total_count":1,"children":[]},{"name":"After reset period, decide whether to recover or escalate.","total_count":1,"children":[]},{"name":"Check if strategy should enter reset mode.         Returns the size multiplier (","total_count":1,"children":[]},{"name":"Record a trade during reset mode.","total_count":1,"children":[]},{"name":"Reset & Learn Loop \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 When the bot takes a big hit, it doesn't p","total_count":1,"children":[]},{"name":"ResetLoop","total_count":1,"children":[]},{"name":"ResetState","total_count":1,"children":[]},{"name":"Return status for all strategies.","total_count":1,"children":[]}]},{"name":"risk_manager.py","total_count":16,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".get_daily_loss_pct()","total_count":1,"children":[]},{"name":".get_risk_dict()","total_count":1,"children":[]},{"name":".is_trading_allowed()","total_count":1,"children":[]},{"name":".record_loss()","total_count":1,"children":[]},{"name":".track_equity()","total_count":1,"children":[]},{"name":".update_positions()","total_count":1,"children":[]},{"name":"Check all risk gates. Returns detailed status.         HONESTY: When trading is","total_count":1,"children":[]},{"name":"Record a realized loss for daily tracking.","total_count":1,"children":[]},{"name":"Return risk status as a JSON-friendly dict for the API.","total_count":1,"children":[]},{"name":"Risk Manager \u2014 Drawdown Guard & Daily Loss Limit \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500","total_count":1,"children":[]},{"name":"RiskManager","total_count":1,"children":[]},{"name":"RiskStatus","total_count":1,"children":[]},{"name":"Total daily losses as percentage of peak equity.","total_count":1,"children":[]},{"name":"Update equity tracking. Returns current drawdown percentage.","total_count":1,"children":[]},{"name":"Update the current open position count.","total_count":1,"children":[]}]},{"name":"RiskGauge.jsx","total_count":2,"children":[{"name":"getRiskColor()","total_count":1,"children":[]},{"name":"RiskGauge()","total_count":1,"children":[]}]},{"name":"rsi_revert.py","total_count":6,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._calc_rsi()","total_count":1,"children":[]},{"name":".calculate_indicators()","total_count":1,"children":[]},{"name":".generate_signal()","total_count":1,"children":[]},{"name":"RSI Mean Reversion Strategy \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 RSI(14) oversold/overbo","total_count":1,"children":[]},{"name":"RSIRevertStrategy","total_count":1,"children":[]}]},{"name":"server.py","total_count":29,"children":[{"name":"ai_analyze_market()","total_count":1,"children":[]},{"name":"ai_chat()","total_count":1,"children":[]},{"name":"ai_explain_trade()","total_count":1,"children":[]},{"name":"ai_generate_strategy()","total_count":1,"children":[]},{"name":"ai_improve_strategy()","total_count":1,"children":[]},{"name":"ai_suggest_strategy()","total_count":1,"children":[]},{"name":"broadcast()","total_count":1,"children":[]},{"name":"Called by main.py to share engine references with the API.","total_count":1,"children":[]},{"name":"create_custom_strategy()","total_count":1,"children":[]},{"name":"get_ai_models()","total_count":1,"children":[]},{"name":"get_equity()","total_count":1,"children":[]},{"name":"get_positions()","total_count":1,"children":[]},{"name":"get_prices()","total_count":1,"children":[]},{"name":"get_risk()","total_count":1,"children":[]},{"name":"get_status()","total_count":1,"children":[]},{"name":"get_strategies()","total_count":1,"children":[]},{"name":"get_trades()","total_count":1,"children":[]},{"name":"list_backtest_results()","total_count":1,"children":[]},{"name":"list_custom_strategies()","total_count":1,"children":[]},{"name":"remove_custom_strategy()","total_count":1,"children":[]},{"name":"run_backtest_endpoint()","total_count":1,"children":[]},{"name":"Send a message to all connected WebSocket clients.","total_count":1,"children":[]},{"name":"serve_dashboard()","total_count":1,"children":[]},{"name":"set_engine_state()","total_count":1,"children":[]},{"name":"start_bot()","total_count":1,"children":[]},{"name":"stop_bot()","total_count":1,"children":[]},{"name":"update_custom_strategy()","total_count":1,"children":[]},{"name":"websocket_endpoint()","total_count":1,"children":[]},{"name":"Xiaoxiao API \u2014 FastAPI REST + WebSocket Server \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500","total_count":1,"children":[]}]},{"name":"StatsPanel.jsx","total_count":2,"children":[{"name":"STATS","total_count":1,"children":[]},{"name":"StatsPanel()","total_count":1,"children":[]}]},{"name":"StatusBadge.jsx","total_count":2,"children":[{"name":"StatusBadge()","total_count":1,"children":[]},{"name":"statusConfig","total_count":1,"children":[]}]},{"name":"strategy_manager.py","total_count":20,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._load_strategy_file()","total_count":1,"children":[]},{"name":".delete_strategy()","total_count":1,"children":[]},{"name":".get_all_strategies()","total_count":1,"children":[]},{"name":".get_strategy_code()","total_count":1,"children":[]},{"name":".list_custom_strategies()","total_count":1,"children":[]},{"name":".load_custom_strategies()","total_count":1,"children":[]},{"name":".reload_strategy()","total_count":1,"children":[]},{"name":".save_strategy_code()","total_count":1,"children":[]},{"name":"Delete a custom strategy file.","total_count":1,"children":[]},{"name":"Dynamically import a strategy from a Python file.","total_count":1,"children":[]},{"name":"List all custom strategy files with metadata.","total_count":1,"children":[]},{"name":"Load all custom strategy files from the custom_strategies directory.","total_count":1,"children":[]},{"name":"Manages both built-in and custom strategies.     Custom strategies are Python fi","total_count":1,"children":[]},{"name":"Read the source code of a custom strategy.","total_count":1,"children":[]},{"name":"Reload a specific custom strategy from disk.","total_count":1,"children":[]},{"name":"Return combined list of built-in + custom strategies.","total_count":1,"children":[]},{"name":"Save strategy code to a Python file.         Returns the filepath.","total_count":1,"children":[]},{"name":"Strategy Manager \u2014 Dynamic Strategy CRUD \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500","total_count":1,"children":[]},{"name":"StrategyManager","total_count":1,"children":[]}]},{"name":"StrategyBuilder.jsx","total_count":1,"children":[{"name":"StrategyBuilder()","total_count":1,"children":[]}]},{"name":"StrategyCard.jsx","total_count":2,"children":[{"name":"statusMap","total_count":1,"children":[]},{"name":"StrategyCard()","total_count":1,"children":[]}]},{"name":"TradeTable.jsx","total_count":1,"children":[{"name":"TradeTable()","total_count":1,"children":[]}]},{"name":"useApi.js","total_count":2,"children":[{"name":"request()","total_count":1,"children":[]},{"name":"useApi()","total_count":1,"children":[]}]},{"name":"useWebSocket.js","total_count":1,"children":[{"name":"useWebSocket()","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"vite.config.js","total_count":1,"children":[]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>
