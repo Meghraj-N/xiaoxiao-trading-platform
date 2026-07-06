@@ -198,6 +198,69 @@ async def get_settings_endpoint():
         "MAX_RISK_PCT": config.MAX_RISK_PCT,
     }
 
+class AIChatRequest(BaseModel):
+    message: str
+    history: list[dict] = []
+
+@app.post("/api/ai/chat")
+async def ai_chat(req: AIChatRequest):
+    ai_engine = _engine_state.get("ai_engine")
+    if not ai_engine or not ai_engine.available:
+        return {"response": "AI Engine is not configured or unavailable. Check API keys."}
+    
+    context = json.dumps(req.history[-3:]) if req.history else ""
+    response = await ai_engine.chat(req.message, context)
+    return {"response": response}
+
+class AIStrategyRequest(BaseModel):
+    prompt: str
+
+@app.post("/api/ai/strategy/generate")
+async def ai_strategy_generate(req: AIStrategyRequest):
+    ai_engine = _engine_state.get("ai_engine")
+    if not ai_engine or not ai_engine.available:
+        return {"error": "AI Engine is not configured"}
+    
+    res = await ai_engine.generate_strategy_code(req.prompt)
+    return res
+
+class RiskSettingsRequest(BaseModel):
+    MAX_DRAWDOWN_PCT: float
+    DAILY_LOSS_LIMIT_PCT: float
+    MAX_OPEN_POSITIONS: int
+    DEFAULT_LEVERAGE: int
+
+@app.post("/api/risk/settings")
+async def update_risk_settings(req: RiskSettingsRequest):
+    import config
+    config.update_settings(req.dict())
+    
+    risk_mgr = _engine_state.get("risk_manager")
+    if risk_mgr:
+        risk_mgr.max_drawdown = req.MAX_DRAWDOWN_PCT
+        risk_mgr.daily_loss_limit = req.DAILY_LOSS_LIMIT_PCT
+        risk_mgr.max_positions = req.MAX_OPEN_POSITIONS
+        
+    return {"status": "success", "message": "Risk settings updated."}
+
+@app.post("/api/risk/liquidate")
+async def risk_liquidate():
+    paper_trader = _engine_state.get("paper_trader")
+    if not paper_trader:
+        return {"error": "Trader engine not running"}
+    
+    count = 0
+    for pos_id, pos in list(paper_trader.open_positions.items()):
+        current_price = _engine_state.get("current_prices", {}).get(pos.symbol, pos.entry_price)
+        await paper_trader.close_position(pos.symbol, current_price, "LIQUIDATE_ALL")
+        count += 1
+        
+    risk_mgr = _engine_state.get("risk_manager")
+    if risk_mgr:
+        risk_mgr.trading_allowed = False
+        
+    return {"status": "success", "message": f"Liquidated {count} positions and halted trading."}
+
 @app.get("/api/options/chain")
 async def get_options_chain(symbol: str = Query("BTC"), price: float = Query(0.0)):
     """Fetch live option chain data from Delta Exchange."""

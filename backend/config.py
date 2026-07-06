@@ -130,10 +130,16 @@ CORS_ORIGINS: list[str] = [
 ]
 
 # ---------------------------------------------------------------------------
-# NVIDIA NIM AI Integration
+# AI Integration (NVIDIA NIM & OpenRouter)
 # ---------------------------------------------------------------------------
 NVIDIA_API_KEY: str = os.getenv("NVIDIA_API_KEY", "")
 NVIDIA_BASE_URL: str = "https://integrate.api.nvidia.com/v1"
+
+OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
+
+# Default provider choice
+AI_PROVIDER: str = get_setting("AI_PROVIDER", "nvidia") # "nvidia" or "openrouter"
 
 # Available models on NVIDIA NIM
 AI_MODELS: dict[str, str] = {
@@ -141,6 +147,9 @@ AI_MODELS: dict[str, str] = {
     "nemotron-340b": "nvidia/nemotron-4-340b-instruct",
     "mixtral-8x22b": "mistralai/mixtral-8x22b-instruct-v0.1",
     "gemma-2-27b": "google/gemma-2-27b-it",
+    # OpenRouter additions
+    "claude-3.5-sonnet": "anthropic/claude-3.5-sonnet",
+    "gpt-4o": "openai/gpt-4o",
 }
 DEFAULT_AI_MODEL: str = "meta/llama-3.1-405b-instruct"
 

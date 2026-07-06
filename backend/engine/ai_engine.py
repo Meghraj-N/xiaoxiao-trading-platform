@@ -30,18 +30,31 @@ class AIEngine:
     """
 
     def __init__(self):
-        if not config.NVIDIA_API_KEY:
-            logger.warning(
-                "NVIDIA_API_KEY not set. AI features disabled. "
-                "Get a free key at https://build.nvidia.com"
-            )
-            self.client = None
+        provider = getattr(config, "AI_PROVIDER", "nvidia").lower()
+        
+        if provider == "openrouter":
+            if not getattr(config, "OPENROUTER_API_KEY", ""):
+                logger.warning("OPENROUTER_API_KEY not set. AI features disabled.")
+                self.client = None
+            else:
+                self.client = AsyncOpenAI(
+                    base_url=getattr(config, "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"),
+                    api_key=config.OPENROUTER_API_KEY,
+                )
+                logger.info("AI Engine initialized with OpenRouter")
         else:
-            self.client = AsyncOpenAI(
-                base_url=config.NVIDIA_BASE_URL,
-                api_key=config.NVIDIA_API_KEY,
-            )
-            logger.info("AI Engine initialized with NVIDIA NIM")
+            if not config.NVIDIA_API_KEY:
+                logger.warning(
+                    "NVIDIA_API_KEY not set. AI features disabled. "
+                    "Get a free key at https://build.nvidia.com"
+                )
+                self.client = None
+            else:
+                self.client = AsyncOpenAI(
+                    base_url=config.NVIDIA_BASE_URL,
+                    api_key=config.NVIDIA_API_KEY,
+                )
+                logger.info("AI Engine initialized with NVIDIA NIM")
 
     @property
     def available(self) -> bool:
