@@ -136,6 +136,7 @@ export default function TradingPage() {
                   <input 
                     type="number"
                     value={price || ''}
+                    onChange={(e) => setPrice(Number(e.target.value))}
                     className="w-full bg-surface-container-lowest border border-white/10 rounded-lg px-3 py-2 text-on-surface font-data-md outline-none focus:border-primary focus:shadow-[0_0_10px_rgba(255,180,163,0.2)]"
                   />
                 </div>
