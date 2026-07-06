@@ -141,7 +141,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">API Key</label>
                     <input 
                       name="DELTA_API_KEY"
-                      value={settings.DELTA_API_KEY}
+                      value={settings.DELTA_API_KEY || ''}
                       onChange={handleChange}
                       placeholder="Paste Delta API Key"
                       className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs" 
@@ -152,7 +152,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">API Secret</label>
                     <input 
                       name="DELTA_API_SECRET"
-                      value={settings.DELTA_API_SECRET}
+                      value={settings.DELTA_API_SECRET || ''}
                       onChange={handleChange}
                       placeholder="Paste Delta API Secret"
                       className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs" 
@@ -169,7 +169,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Active AI Provider</label>
                     <select 
                       name="AI_PROVIDER"
-                      value={settings.AI_PROVIDER}
+                      value={settings.AI_PROVIDER || 'nvidia'}
                       onChange={handleChange}
                       className="input-field w-full py-2 font-title-md text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs"
                     >
@@ -182,7 +182,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">NVIDIA NIM API Key</label>
                     <input 
                       name="NVIDIA_API_KEY"
-                      value={settings.NVIDIA_API_KEY}
+                      value={settings.NVIDIA_API_KEY || ''}
                       onChange={handleChange}
                       placeholder="nvapi-..."
                       className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs" 
@@ -194,7 +194,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">OpenRouter API Key</label>
                     <input 
                       name="OPENROUTER_API_KEY"
-                      value={settings.OPENROUTER_API_KEY}
+                      value={settings.OPENROUTER_API_KEY || ''}
                       onChange={handleChange}
                       placeholder="sk-or-v1-..."
                       className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs" 
@@ -206,7 +206,7 @@ export default function SettingsPage() {
                     <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Default Model</label>
                     <select 
                       name="DEFAULT_AI_MODEL"
-                      value={settings.DEFAULT_AI_MODEL}
+                      value={settings.DEFAULT_AI_MODEL || 'meta/llama-3.1-405b-instruct'}
                       onChange={handleChange}
                       className="input-field w-full py-2 font-title-md text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs"
                     >
