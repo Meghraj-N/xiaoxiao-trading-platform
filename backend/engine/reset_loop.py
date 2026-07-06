@@ -21,7 +21,7 @@ class ResetState:
     reset_cycle: int = 0
     trades_in_reset: int = 0
     size_multiplier: float = 1.0
-    disabled_strategies: list[str] = field(default_factory=list)
+    is_disabled: bool = False
 
 
 class ResetLoop:
@@ -41,7 +41,7 @@ class ResetLoop:
         state = self._get_state(strategy_name)
 
         # Already disabled?
-        if strategy_name in state.disabled_strategies:
+        if state.is_disabled:
             return 0.0
 
         # Already in reset — return reduced multiplier
@@ -63,7 +63,7 @@ class ResetLoop:
 
             # Nuclear option: too many reset cycles
             if state.reset_cycle >= config.MAX_RESET_CYCLES:
-                state.disabled_strategies.append(strategy_name)
+                state.is_disabled = True
                 logger.error(
                     f"DISABLED: {strategy_name} after {config.MAX_RESET_CYCLES} failed reset cycles. "
                     f"This strategy has no demonstrated edge. Honest assessment: stop using it."
@@ -101,7 +101,16 @@ class ResetLoop:
 
     def is_strategy_disabled(self, strategy_name: str) -> bool:
         state = self._get_state(strategy_name)
-        return strategy_name in state.disabled_strategies
+        return state.is_disabled
+
+    def disable_strategy(self, strategy_name: str):
+        state = self._get_state(strategy_name)
+        state.is_disabled = True
+
+    def enable_strategy(self, strategy_name: str):
+        state = self._get_state(strategy_name)
+        state.is_disabled = False
+        state.reset_cycle = 0  # Give it a fresh start if manually re-enabled
 
     def get_status(self) -> dict:
         """Return status for all strategies."""
@@ -112,6 +121,6 @@ class ResetLoop:
                 "reset_cycle": state.reset_cycle,
                 "trades_in_reset": state.trades_in_reset,
                 "size_multiplier": state.size_multiplier,
-                "disabled": name in state.disabled_strategies,
+                "disabled": state.is_disabled,
             }
         return result

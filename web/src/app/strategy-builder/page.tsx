@@ -12,51 +12,32 @@ export default function StrategyBuilderPage() {
 
   const fetchStrategies = async () => {
     try {
-      // First get built-in running strategies
-      const res1 = await fetch('http://localhost:8000/api/strategies');
-      const data1 = await res1.json();
+      const res = await fetch('http://localhost:8000/api/strategies');
+      const data = await res.json();
       
-      // Then get custom strategies from db
-      const res2 = await fetch('http://localhost:8000/api/custom-strategies');
-      const data2 = await res2.json();
+      const builtInNames = [
+        "EMA Cross", "RSI Revert", "Boll Break", 
+        "200-MA Trend Following", "ORB Breakout", "Supertrend Flipper"
+      ];
 
-      // Combine them or display appropriately
-      const combined = (data1.strategies || []).map((s: any) => ({
+      const loaded = (data.strategies || []).map((s: any) => ({
         ...s,
-        isCustom: false,
-        winRate: (Math.random() * 40 + 50).toFixed(1), // Mock stats for UI
-        pnl: (Math.random() * 1000 - 200).toFixed(2),
-        sharpe: (Math.random() * 2 + 1).toFixed(2),
-        maxDd: (Math.random() * -10).toFixed(1)
-      }));
-      
-      const customStrats = (data2.strategies || []).map((s: any) => ({
-        name: s.name,
-        active: false,
-        isCustom: true,
-        winRate: (Math.random() * 40 + 50).toFixed(1),
-        pnl: (Math.random() * 1000 - 200).toFixed(2),
-        sharpe: (Math.random() * 2 + 1).toFixed(2),
-        maxDd: (Math.random() * -10).toFixed(1)
+        isCustom: !builtInNames.includes(s.name),
+        winRate: "0.0", 
+        pnl: "0.00",
+        sharpe: "0.00",
+        maxDd: "0.0"
       }));
 
       // Add a couple defaults if backend doesn't have them running
-      if (combined.length === 0) {
-        combined.push({
+      if (loaded.length === 0) {
+        loaded.push({
           name: "Volatility Scalper", active: true, isCustom: false,
-          winRate: "78.4", pnl: "+1245.50", sharpe: "3.24", maxDd: "-4.2"
-        });
-        combined.push({
-          name: "Trend Follower", active: false, isCustom: false,
-          winRate: "62.1", pnl: "-142.30", sharpe: "1.85", maxDd: "-12.4"
-        });
-        combined.push({
-          name: "HFT Arbitrage", active: false, isCustom: false,
-          winRate: "94.2", pnl: "+310.75", sharpe: "4.12", maxDd: "-0.8"
+          winRate: "0.0", pnl: "0.00", sharpe: "0.00", maxDd: "0.0"
         });
       }
 
-      setStrategies([...combined, ...customStrats]);
+      setStrategies(loaded);
     } catch (err) {
       console.error(err);
     } finally {
@@ -156,8 +137,8 @@ export default function StrategyBuilderPage() {
                 </div>
                 <div className="flex flex-col">
                   <span className="font-label-caps text-[10px] text-on-surface-variant opacity-60">24H P&L</span>
-                  <span className={`font-data-lg text-data-lg px-2 py-0.5 rounded ${parseFloat(strat.pnl) >= 0 ? 'text-primary bg-primary/10 shadow-[0_0_8px_rgba(255,180,163,0.2)]' : 'text-secondary bg-secondary/10'}`}>
-                    {parseFloat(strat.pnl) >= 0 ? '+' : ''}${strat.pnl}
+                  <span className={`font-data-lg text-data-lg px-2 py-0.5 rounded ${parseFloat(strat.pnl) > 0 ? 'text-primary bg-primary/10 shadow-[0_0_8px_rgba(255,180,163,0.2)]' : parseFloat(strat.pnl) < 0 ? 'text-error bg-error/10' : 'text-on-surface bg-surface-container-high'}`}>
+                    {parseFloat(strat.pnl) > 0 ? '+' : ''}${strat.pnl}
                   </span>
                 </div>
                 <div className="flex flex-col">

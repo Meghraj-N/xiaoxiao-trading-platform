@@ -36,10 +36,7 @@ export default function PortfolioPage() {
         const data = await res.json();
         setPositions(data.positions);
         
-        let total = 100000; // base mock cash
-        data.positions.forEach((p: any) => {
-          total += p.size * p.entry_price;
-        });
+        let total = data.equity || 100000;
         setTotalValue(total);
       } catch (err) {
         console.error(err);
@@ -56,7 +53,7 @@ export default function PortfolioPage() {
       {
         fill: true,
         label: 'Portfolio Value',
-        data: [100000, 102000, 101500, 105000, 104200, 108000, 107500, totalValue > 100000 ? totalValue : 110000],
+        data: positions.length === 0 && totalValue === 100000 ? [100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000] : [100000, 102000, 101500, 105000, 104200, 108000, 107500, totalValue > 100000 ? totalValue : 110000],
         borderColor: '#ffb4a3',
         backgroundColor: 'rgba(255, 180, 163, 0.2)',
         tension: 0.4,
@@ -111,9 +108,9 @@ export default function PortfolioPage() {
             <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">
               ${totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
             </div>
-            <div className="font-data-sm text-data-sm text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] flex items-center gap-1">
-              <span className="material-symbols-outlined text-[16px]">trending_up</span>
-              +2.4% (+$2,845.20)
+            <div className="font-data-sm text-data-sm text-on-surface-variant flex items-center gap-1">
+              <span className="material-symbols-outlined text-[16px]">trending_flat</span>
+              +0.0% (+$0.00)
             </div>
           </div>
           
@@ -123,10 +120,10 @@ export default function PortfolioPage() {
               Daily P&L
               <span className="material-symbols-outlined text-secondary text-[18px]">payments</span>
             </div>
-            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">+$1,210.80</div>
-            <div className="font-data-sm text-data-sm text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] flex items-center gap-1">
-              <span className="material-symbols-outlined text-[16px]">arrow_upward</span>
-              +1.2% Today
+            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">+$0.00</div>
+            <div className="font-data-sm text-data-sm text-on-surface-variant flex items-center gap-1">
+              <span className="material-symbols-outlined text-[16px]">horizontal_rule</span>
+              0.0% Today
             </div>
           </div>
 
@@ -136,7 +133,7 @@ export default function PortfolioPage() {
               Max Drawdown
               <span className="material-symbols-outlined text-error text-[18px]">warning</span>
             </div>
-            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">-4.2%</div>
+            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">-0.0%</div>
             <div className="font-data-sm text-data-sm text-on-surface-variant opacity-70 flex items-center gap-1">
               Last 30 Days
             </div>
@@ -148,9 +145,9 @@ export default function PortfolioPage() {
               Sharpe Ratio
               <span className="material-symbols-outlined text-primary-container text-[18px]">multiline_chart</span>
             </div>
-            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">2.14</div>
+            <div className="font-data-lg text-[28px] leading-tight text-on-surface mb-2 tracking-wide">0.00</div>
             <div className="font-data-sm text-data-sm text-on-surface-variant opacity-70 flex items-center gap-1">
-              Risk Adjusted
+              Risk-Adjusted Return
             </div>
           </div>
         </div>

@@ -105,12 +105,46 @@ export default function SettingsPage() {
               <p className="text-on-surface-variant text-sm mt-1">Manage your personal profile and subscription.</p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <span className="material-symbols-outlined text-[48px] text-on-surface-variant/40 mb-4">construction</span>
-            <h3 className="text-on-surface font-title-md text-lg">Coming Soon</h3>
-            <p className="text-on-surface-variant text-sm max-w-md mt-2">
-              Account management features are being integrated with Supabase Auth in the upcoming release.
-            </p>
+          <div className="flex flex-col gap-6 mt-4 max-w-2xl">
+            
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary/50 flex items-center justify-center text-primary text-2xl font-bold">
+                JD
+              </div>
+              <div>
+                <button className="px-4 py-2 bg-surface-container-highest rounded text-sm text-on-surface hover:bg-surface-container border border-white/10 transition-colors">Change Avatar</button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-2">
+                <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Full Name</label>
+                <input 
+                  defaultValue="John Doe"
+                  className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs" 
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="font-label-caps text-label-caps text-on-surface-variant text-[10px]">Email Address</label>
+                <input 
+                  defaultValue="john.doe@example.com"
+                  className="input-field w-full py-2 font-mono text-on-surface px-3 bg-surface-container-highest rounded border border-white/5 text-xs text-on-surface-variant" 
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg mt-2 flex justify-between items-center">
+              <div>
+                <h4 className="text-on-surface font-title-md text-sm text-primary">Pro Plan Active</h4>
+                <p className="text-on-surface-variant text-xs mt-1">Your subscription renews on Aug 15, 2026.</p>
+              </div>
+              <button className="px-4 py-2 bg-primary text-on-primary rounded text-xs font-label-caps hover:bg-primary/90 transition-colors">Manage Billing</button>
+            </div>
+            
+            <div className="mt-4 border-t border-outline-variant/30 pt-4 flex justify-end">
+              <button className="btn-primary px-4 py-2 rounded font-label-caps text-label-caps text-xs transition-colors">SAVE CHANGES</button>
+            </div>
           </div>
         </section>
       );
@@ -128,12 +162,42 @@ export default function SettingsPage() {
               <p className="text-on-surface-variant text-sm mt-1">Configure two-factor authentication and passwords.</p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <span className="material-symbols-outlined text-[48px] text-on-surface-variant/40 mb-4">lock</span>
-            <h3 className="text-on-surface font-title-md text-lg">Secure by Design</h3>
-            <p className="text-on-surface-variant text-sm max-w-md mt-2">
-              Advanced security settings (2FA, Password management, Active Sessions) will be available once the cloud environment is finalized.
-            </p>
+          <div className="flex flex-col gap-6 mt-4 max-w-2xl">
+            
+            <div className="flex flex-col gap-4 p-4 bg-surface-container-highest rounded border border-white/5">
+              <div>
+                <h4 className="text-on-surface font-title-md text-sm">Change Password</h4>
+                <p className="text-on-surface-variant text-xs mt-1">Update your password to keep your account secure.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="password" placeholder="Current Password" className="input-field w-full py-2 px-3 bg-surface-container rounded border border-white/5 text-xs text-on-surface" />
+                <input type="password" placeholder="New Password" className="input-field w-full py-2 px-3 bg-surface-container rounded border border-white/5 text-xs text-on-surface" />
+              </div>
+              <div className="flex justify-end mt-2">
+                <button className="px-4 py-2 bg-surface-container text-on-surface rounded text-xs font-label-caps border border-white/10 hover:bg-surface-variant transition-colors">UPDATE PASSWORD</button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-surface-container-highest rounded border border-white/5">
+              <div>
+                <h4 className="text-on-surface font-title-md text-sm">Two-Factor Authentication (2FA)</h4>
+                <p className="text-on-surface-variant text-xs mt-1">Add an extra layer of security to your account.</p>
+              </div>
+              <button className="px-4 py-2 bg-primary/20 text-primary border border-primary/50 rounded text-xs font-label-caps hover:bg-primary/30 transition-colors">ENABLE 2FA</button>
+            </div>
+            
+            <div>
+              <h4 className="text-on-surface font-title-md text-sm mb-3 mt-2">Active Sessions</h4>
+              <div className="flex items-center justify-between p-3 bg-surface-container-highest rounded border border-white/5 mb-2">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary">computer</span>
+                  <div>
+                    <div className="text-sm text-on-surface">Windows • Chrome</div>
+                    <div className="text-xs text-on-surface-variant">Current Session • IP: 192.168.1.1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       );
@@ -157,8 +221,8 @@ export default function SettingsPage() {
                 <h4 className="text-on-surface font-title-md text-sm">Trade Executions</h4>
                 <p className="text-on-surface-variant text-xs mt-1">Receive alerts when the bot buys or sells.</p>
               </div>
-              <div className="w-10 h-5 bg-primary/20 border border-primary/50 rounded-full flex items-center px-0.5 cursor-pointer">
-                <div className="w-4 h-4 bg-primary rounded-full translate-x-5"></div>
+              <div className="w-10 h-5 bg-primary/20 border border-primary/50 rounded-full flex items-center px-0.5 cursor-pointer" onClick={(e) => { e.currentTarget.classList.toggle('bg-primary/20'); e.currentTarget.classList.toggle('bg-surface-container'); e.currentTarget.firstChild?.classList.toggle('translate-x-5'); e.currentTarget.firstChild?.classList.toggle('bg-on-surface-variant'); e.currentTarget.firstChild?.classList.toggle('bg-primary'); }}>
+                <div className="w-4 h-4 bg-primary rounded-full translate-x-5 transition-transform duration-200"></div>
               </div>
             </div>
             <div className="flex items-center justify-between p-4 bg-surface-container-highest rounded border border-white/5">
@@ -166,8 +230,17 @@ export default function SettingsPage() {
                 <h4 className="text-on-surface font-title-md text-sm">Risk Limits</h4>
                 <p className="text-on-surface-variant text-xs mt-1">Alerts when daily stop-loss limits are hit.</p>
               </div>
-              <div className="w-10 h-5 bg-primary/20 border border-primary/50 rounded-full flex items-center px-0.5 cursor-pointer">
-                <div className="w-4 h-4 bg-primary rounded-full translate-x-5"></div>
+              <div className="w-10 h-5 bg-primary/20 border border-primary/50 rounded-full flex items-center px-0.5 cursor-pointer" onClick={(e) => { e.currentTarget.classList.toggle('bg-primary/20'); e.currentTarget.classList.toggle('bg-surface-container'); e.currentTarget.firstChild?.classList.toggle('translate-x-5'); e.currentTarget.firstChild?.classList.toggle('bg-on-surface-variant'); e.currentTarget.firstChild?.classList.toggle('bg-primary'); }}>
+                <div className="w-4 h-4 bg-primary rounded-full translate-x-5 transition-transform duration-200"></div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-surface-container-highest rounded border border-white/5">
+              <div>
+                <h4 className="text-on-surface font-title-md text-sm">System Errors</h4>
+                <p className="text-on-surface-variant text-xs mt-1">Immediate alerts for disconnects or API failures.</p>
+              </div>
+              <div className="w-10 h-5 bg-primary/20 border border-primary/50 rounded-full flex items-center px-0.5 cursor-pointer" onClick={(e) => { e.currentTarget.classList.toggle('bg-primary/20'); e.currentTarget.classList.toggle('bg-surface-container'); e.currentTarget.firstChild?.classList.toggle('translate-x-5'); e.currentTarget.firstChild?.classList.toggle('bg-on-surface-variant'); e.currentTarget.firstChild?.classList.toggle('bg-primary'); }}>
+                <div className="w-4 h-4 bg-primary rounded-full translate-x-5 transition-transform duration-200"></div>
               </div>
             </div>
             <div className="flex items-center justify-between p-4 bg-surface-container-highest rounded border border-white/5">
@@ -175,8 +248,8 @@ export default function SettingsPage() {
                 <h4 className="text-on-surface font-title-md text-sm">Marketing Emails</h4>
                 <p className="text-on-surface-variant text-xs mt-1">Receive platform updates and news.</p>
               </div>
-              <div className="w-10 h-5 bg-surface-container rounded-full flex items-center px-0.5 cursor-pointer border border-white/10">
-                <div className="w-4 h-4 bg-on-surface-variant rounded-full"></div>
+              <div className="w-10 h-5 bg-surface-container rounded-full flex items-center px-0.5 cursor-pointer border border-white/10" onClick={(e) => { e.currentTarget.classList.toggle('bg-primary/20'); e.currentTarget.classList.toggle('bg-surface-container'); e.currentTarget.firstChild?.classList.toggle('translate-x-5'); e.currentTarget.firstChild?.classList.toggle('bg-on-surface-variant'); e.currentTarget.firstChild?.classList.toggle('bg-primary'); }}>
+                <div className="w-4 h-4 bg-on-surface-variant rounded-full transition-transform duration-200"></div>
               </div>
             </div>
           </div>

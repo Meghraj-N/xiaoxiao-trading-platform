@@ -173,8 +173,24 @@ async def get_positions():
                 "strategy": p.strategy_name,
                 "entry_time": p.entry_time,
             })
-        return {"positions": positions}
-    return {"positions": []}
+        
+        # calculate equity with current prices
+        current_prices = _engine_state.get("current_prices", {})
+        equity = paper_trader.cash
+        for p in paper_trader.open_positions.values():
+            cp = current_prices.get(p.symbol, p.entry_price)
+            if p.side == "long":
+                pnl = (cp - p.entry_price) * p.quantity
+            else:
+                pnl = (p.entry_price - cp) * p.quantity
+            equity += p.margin + pnl
+
+        return {
+            "positions": positions,
+            "cash": paper_trader.cash,
+            "equity": equity
+        }
+    return {"positions": [], "cash": 100000.0, "equity": 100000.0}
 
 
 @app.get("/api/risk")
@@ -474,6 +490,13 @@ async def start_bot(request: Request):
     except Exception:
         strategy = "All"
         
+    if strategy != "All":
+        reset_loop = _engine_state.get("reset_loop")
+        if reset_loop:
+            reset_loop.enable_strategy(strategy)
+        logger.info(f"Enabled strategy: {strategy}")
+        return {"status": "started", "strategy": strategy}
+
     _engine_state["running"] = True
     _engine_state["active_strategy"] = strategy
     _engine_state["start_time"] = datetime.now(timezone.utc)
@@ -483,7 +506,20 @@ async def start_bot(request: Request):
 
 
 @app.post("/api/control/stop")
-async def stop_bot():
+async def stop_bot(request: Request):
+    try:
+        data = await request.json()
+        strategy = data.get("strategy", "All")
+    except Exception:
+        strategy = "All"
+        
+    if strategy != "All":
+        reset_loop = _engine_state.get("reset_loop")
+        if reset_loop:
+            reset_loop.disable_strategy(strategy)
+        logger.info(f"Disabled strategy: {strategy}")
+        return {"status": "stopped", "strategy": strategy}
+
     _engine_state["running"] = False
     await broadcast({"type": "status_change", "running": False})
     logger.info("Bot STOP command received via API")
