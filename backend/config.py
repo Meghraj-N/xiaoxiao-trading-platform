@@ -123,7 +123,7 @@ GATE_MIN_TRADES: int = 30
 # API / Server
 # ---------------------------------------------------------------------------
 API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
-API_PORT: int = int(os.getenv("API_PORT", "8000"))
+API_PORT: int = int(os.getenv("PORT", os.getenv("API_PORT", "8000")))
 CORS_ORIGINS: list[str] = [
     "http://localhost:5173",   # Vite dev server
     "http://127.0.0.1:5173",
