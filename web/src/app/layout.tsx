@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   description: "AI-powered analytics for Options Trading",
 };
 
+import ClientOnly from "@/components/layout/ClientOnly";
 import { TopNavBar } from "@/components/layout/TopNavBar";
 import { SideNavBar } from "@/components/layout/SideNavBar";
 
@@ -44,13 +45,15 @@ export default function RootLayout({
         data-gramm_editor="false"
         data-enable-grammarly="false"
       >
-        <TopNavBar />
-        <div className="flex min-h-screen pt-16">
-          <SideNavBar />
-          <main className="flex-1 md:pl-64 flex flex-col min-h-[calc(100vh-64px)] overflow-x-hidden">
-            {children}
-          </main>
-        </div>
+        <ClientOnly>
+          <TopNavBar />
+          <div className="flex min-h-screen pt-16">
+            <SideNavBar />
+            <main className="flex-1 md:pl-64 flex flex-col min-h-[calc(100vh-64px)] overflow-x-hidden">
+              {children}
+            </main>
+          </div>
+        </ClientOnly>
       </body>
     </html>
   );
